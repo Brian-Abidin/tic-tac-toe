@@ -37,24 +37,58 @@ function gameboard(input, input2) {
       [2, 2, 2]
     ]
   };
+
   console.log(game.board[1][2]);
   // displays gameboard over webpage
 }
 
-gameboard();
+// gameboard module
+const gameBoard = (() => {
+  // first function clear
+  const clear = () => {
+    const node = document.getElementById("game");
+    node.querySelectorAll("*").forEach((n) => n.remove());
+    const box = document.getElementById("game");
+    const num = 3;
+    for (let i = 0; i < num * num; i += 1) {
+      const row = document.createElement("div");
+      box.style.gridTemplateColumns = `repeat(${num}, 1fr)`;
+      box.style.gridTemplateRows = `repeat(${num}, 1fr)`;
+      box.appendChild(row).classList.add(`box${i}`);
+      // add function that makes the box an object that represents board
+    }
+  };
+  // return functions
+  return {
+    clear
+  };
+})();
 
-function displayBoard() {
-  // diplsay a 3x3 grid
-  // each box represents a section of the board array
-  const node = document.getElementById("game");
-  node.querySelectorAll("*").forEach((n) => n.remove());
-  const box = document.getElementById("game");
-  const num = 3;
-  for (let i = 0; i < num * num; i += 1) {
-    const row = document.createElement("div");
-    box.style.gridTemplateColumns = `repeat(${num}, 1fr)`;
-    box.style.gridTemplateRows = `repeat(${num}, 1fr)`;
-    box.appendChild(row).classList.add(`box${i}`);
-    // add function that makes the box an object that represents board
-  }
-}
+// gameboard controller module
+const gameController = (() => {
+  const game = {
+    board: [
+      [0, 0, 0],
+      [1, 1, 1],
+      [2, 2, 2]
+    ]
+  };
+
+  console.log(game.board[1][2]);
+})();
+
+// function displayBoard() {
+//   // diplsay a 3x3 grid
+//   // each box represents a section of the board array
+//   const node = document.getElementById("game");
+//   node.querySelectorAll("*").forEach((n) => n.remove());
+//   const box = document.getElementById("game");
+//   const num = 3;
+//   for (let i = 0; i < num * num; i += 1) {
+//     const row = document.createElement("div");
+//     box.style.gridTemplateColumns = `repeat(${num}, 1fr)`;
+//     box.style.gridTemplateRows = `repeat(${num}, 1fr)`;
+//     box.appendChild(row).classList.add(`box${i}`);
+//     // add function that makes the box an object that represents board
+//   }
+// }
