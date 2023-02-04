@@ -14,21 +14,38 @@
 // start and restart. and a display to congratulate winner.
 
 // function factory creates objects as new players
-function newPlayer(name) {
+function newPlayer() {
+  const pname = document.getElementById("player1").value;
+  const pname2 = document.getElementById("player2").value;
+
+  const player1 = {
+    name: pname,
+    symbol: "x"
+  };
+  const player2 = {
+    name: pname2,
+    symbol: "o"
+  };
   return {
-    name: `${name}`
+    player1,
+    player2
+    // name: `${name}`
     // symbol: `${symbol}`
   };
 }
+
+document.getElementById("enter").addEventListener("click", newPlayer);
+document.getElementById("enter2").addEventListener("click", newPlayer);
+
+// function updatePlayer() {
+//   const player1 = newPlayer(document.getElementById("player1").value);
+//   console.log(player1);
+//   const player2 = newPlayer(document.getElementById("player2").value);
+//   console.log(player2);
+// }
+
+console.log(newPlayer().player1);
 // input player name and on enter stores the name and symbol
-
-const player1 = {
-  name: "Player 1"
-};
-
-const player2 = {
-  name: "Player 2"
-};
 
 // console.log(p1name);
 // console.log(you);
@@ -52,6 +69,8 @@ function gameboard(input, input2) {
 const gameBoard = (() => {
   // first function clear
   const clear = () => {
+    console.log(newPlayer().player1);
+    console.log(newPlayer().player2);
     const node = document.getElementById("game");
     node.querySelectorAll("*").forEach((n) => n.remove());
     const box = document.getElementById("game");
