@@ -49,6 +49,7 @@ function displayBoard() {
     const row = document.createElement("div");
     box.style.gridTemplateColumns = `repeat(${num}, 1fr)`;
     box.style.gridTemplateRows = `repeat(${num}, 1fr)`;
-    box.appendChild(row).classList.add("box");
+    box.appendChild(row).classList.add(`box${i}`);
+    // add function that makes the box an object that represents board
   }
 }
