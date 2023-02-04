@@ -14,18 +14,24 @@
 // start and restart. and a display to congratulate winner.
 
 // function factory creates objects as new players
-function newPlayer(name, symbol) {
+function newPlayer(name) {
   return {
-    name: `${name}`,
-    symbol: `${symbol}`
+    name: `${name}`
+    // symbol: `${symbol}`
   };
 }
 // input player name and on enter stores the name and symbol
-const me = newPlayer("brian", "x");
-const you = newPlayer("joe", "o");
 
-console.log(me);
-console.log(you);
+const player1 = {
+  name: "Player 1"
+};
+
+const player2 = {
+  name: "Player 2"
+};
+
+// console.log(p1name);
+// console.log(you);
 
 // create a function that represents the gameboard with an array
 function gameboard(input, input2) {
