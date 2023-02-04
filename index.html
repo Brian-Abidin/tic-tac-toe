@@ -10,16 +10,25 @@
     <div class="newgame">
       <div class="player1">
         Player 1 "X"
-        <input type="text" name="player1" id="player1" />
-        <button id="enter">Ready!</button>
-        <div class="readyp1">is ready!</div>
+        <input
+          type="text"
+          name="player1"
+          id="player1"
+          placeholder="Enter Name"
+        />
+        <div id="readyp1"></div>
       </div>
       <div class="player2">
         Player 2 "O"
-        <input type="text" name="player2" id="player2" />
-        <button id="enter2">Ready!</button>
-        <div class="readyp2">is ready!</div>
+        <input
+          type="text"
+          name="player2"
+          id="player2"
+          placeholder="Enter Name"
+        />
+        <div id="readyp2"></div>
       </div>
+      <button id="enter" onclick="newPlayer()">Ready!</button>
       <button id="newbtn" onclick="gameBoard.clear()">New Game</button>
       <!--Could turn button inside a form to make players name each other first-->
     </div>
