@@ -17,6 +17,23 @@
 function newPlayer() {
   const pname = document.getElementById("player1").value;
   const pname2 = document.getElementById("player2").value;
+  const readytext = document.getElementById("readyp1");
+  const readytext2 = document.getElementById("readyp2");
+  if (pname === "") {
+    readytext.style.color = "red";
+    readytext.textContent = "Player 1 is not ready!";
+  } else {
+    readytext.style.color = "green";
+    readytext.textContent = `${pname} is ready!`;
+  }
+
+  if (pname2 === "") {
+    readytext2.style.color = "red";
+    readytext2.textContent = "player 2 is not ready!";
+  } else {
+    readytext2.style.color = "green";
+    readytext2.textContent = `${pname2} is ready!`;
+  }
 
   const player1 = {
     name: pname,
@@ -33,9 +50,6 @@ function newPlayer() {
     // symbol: `${symbol}`
   };
 }
-
-document.getElementById("enter").addEventListener("click", newPlayer);
-document.getElementById("enter2").addEventListener("click", newPlayer);
 
 // function updatePlayer() {
 //   const player1 = newPlayer(document.getElementById("player1").value);
