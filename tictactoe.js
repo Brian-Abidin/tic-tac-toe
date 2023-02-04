@@ -20,8 +20,7 @@ function newPlayer(name, symbol) {
     symbol: `${symbol}`
   };
 }
-
-//input player name and on enter stores the name and symbol
+// input player name and on enter stores the name and symbol
 const me = newPlayer("brian", "x");
 const you = newPlayer("joe", "o");
 
@@ -36,5 +35,20 @@ function gameboard(input, input2) {
     [1, 1, 1],
     [2, 2, 2]
   ];
-  for
+  // displays gameboard over webpage
+}
+
+function displayBoard() {
+  // diplsay a 3x3 grid
+  // each box represents a section of the board array
+  const node = document.getElementById("game");
+  node.querySelectorAll("*").forEach((n) => n.remove());
+  const box = document.getElementById("game");
+  const num = 3;
+  for (let i = 0; i < num * num; i += 1) {
+    const row = document.createElement("div");
+    box.style.gridTemplateColumns = `repeat(${num}, 1fr)`;
+    box.style.gridTemplateRows = `repeat(${num}, 1fr)`;
+    box.appendChild(row).classList.add("box");
+  }
 }
