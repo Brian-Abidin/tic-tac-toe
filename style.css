@@ -11,12 +11,10 @@ h1 {
   justify-content: center;
 }
 
-.newgame,
 .board {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: aqua;
 }
 
 #newbtn {
@@ -28,9 +26,7 @@ h1 {
   font-family: "Courier New", Courier, monospace;
   text-transform: uppercase;
   padding-top: 5px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  margin-top: 5px;
 }
 
 .board {
@@ -40,9 +36,23 @@ h1 {
 #game {
   width: 420px;
   height: 420px;
-
   display: grid;
-  background-color: aquamarine;
+}
+
+.newgame {
+  display: grid;
+  align-items: center;
+  justify-content: center;
+}
+
+.player2,
+.player1 {
+  margin-bottom: 10px;
+}
+
+.enter,
+.enter2 {
+  cursor: grab;
 }
 
 .box0,
