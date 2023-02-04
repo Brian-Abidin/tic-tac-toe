@@ -8,7 +8,32 @@
   <body>
     <h1 class="title">Tic Tac Toe Game</h1>
     <div class="newgame">
-      <button id="newbtn" onclick="displayBoard()">New Game</button>
+      <form action="#" method="post" class="gameform">
+        <div class="player1">
+          Player 1
+          <input
+            type="text"
+            name="player1"
+            id="player1"
+            placeholder=""
+            required
+          />
+        </div>
+        <div class="player 2">
+          Player 2
+          <input
+            type="text"
+            name="player2"
+            id="player2"
+            placeholder=""
+            required
+          />
+        </div>
+        <button type="submit" id="newbtn" onsubmit="gameBoard.clear()">
+          New Game
+        </button>
+      </form>
+      <!--Could turn button inside a form to make players name each other first-->
     </div>
     <div class="board">
       <div id="game"></div>
