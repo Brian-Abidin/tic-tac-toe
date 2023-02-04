@@ -30,13 +30,18 @@ console.log(you);
 // create a function that represents the gameboard with an array
 function gameboard(input, input2) {
   // create board
-  const board = [
-    [0, 0, 0],
-    [1, 1, 1],
-    [2, 2, 2]
-  ];
+  const game = {
+    board: [
+      [0, 0, 0],
+      [1, 1, 1],
+      [2, 2, 2]
+    ]
+  };
+  console.log(game.board[1][2]);
   // displays gameboard over webpage
 }
+
+gameboard();
 
 function displayBoard() {
   // diplsay a 3x3 grid
