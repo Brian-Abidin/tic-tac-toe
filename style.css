@@ -69,8 +69,9 @@ h1 {
   cursor: grab;
 }
 
-.readyp1,
-.readyp2 {
+#readyp1,
+#readyp2 {
   display: block;
   color: green;
+  margin-top: 5px;
 }
