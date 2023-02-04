@@ -12,3 +12,16 @@
 // check for when game is over, check for 3 in a row.
 // interface: allow players to put their name, 2 buttons
 // start and restart. and a display to congratulate winner.
+
+function newPlayer(name, symbol) {
+  return {
+    name: `${name}`,
+    symbol: `${symbol}`
+  };
+}
+
+const me = newPlayer("brian", "x");
+const you = newPlayer("joe", "o");
+
+console.log(me);
+console.log(you);
