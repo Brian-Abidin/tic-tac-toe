@@ -68,3 +68,9 @@ h1 {
   border: 3px rgb(2, 2, 2) solid;
   cursor: grab;
 }
+
+.readyp1,
+.readyp2 {
+  display: block;
+  color: green;
+}
