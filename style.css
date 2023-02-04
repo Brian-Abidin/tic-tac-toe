@@ -55,15 +55,15 @@ h1 {
   cursor: grab;
 }
 
-.box0,
-.box1,
-.box2,
-.box3,
-.box4,
-.box5,
-.box6,
-.box7,
-.box8 {
+#box0,
+#box1,
+#box2,
+#box3,
+#box4,
+#box5,
+#box6,
+#box7,
+#box8 {
   background-color: rgb(255, 255, 255);
   border: 3px rgb(2, 2, 2) solid;
   cursor: grab;
