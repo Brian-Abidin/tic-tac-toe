@@ -4,12 +4,15 @@
     <title>Tic Tac Toe</title>
     <meta charset="UTF-8" />
     <link rel="stylesheet" href="style.css" />
-    <script src="tictactoe.js" defer></script>
   </head>
   <body>
     <h1 class="title">Tic Tac Toe Game</h1>
     <div class="newgame">
-      <button class="newbtn">New Game</button>
+      <button id="newbtn" onclick="displayBoard()">New Game</button>
     </div>
+    <div class="board">
+      <div id="game"></div>
+    </div>
+    <script src="tictactoe.js" defer></script>
   </body>
 </html>
