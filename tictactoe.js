@@ -65,7 +65,7 @@ console.log(newPlayer().player1);
 // console.log(you);
 
 // create a function that represents the gameboard with an array
-function gameboard(input, input2) {
+function gameboard() {
   // create board
   const game = {
     board: [
@@ -74,14 +74,21 @@ function gameboard(input, input2) {
       [2, 2, 2]
     ]
   };
+  const gamestate = {};
+  Object.assign(gamestate, game);
+  return {
+    gamestate
+  };
 
-  console.log(game.board[1][2]);
+  // console.log(game.board[1][2]);
   // displays gameboard over webpage
 }
 
 // gameboard module
 const gameBoard = (() => {
-  // first function clear
+  gameboard();
+  const gamestate = gameboard().gamestate.board;
+  console.log(gamestate[0].length);
   const clear = () => {
     console.log(newPlayer().player1);
     console.log(newPlayer().player2);
@@ -94,9 +101,16 @@ const gameBoard = (() => {
       box.style.gridTemplateColumns = `repeat(${num}, 1fr)`;
       box.style.gridTemplateRows = `repeat(${num}, 1fr)`;
       box.appendChild(row).classList.add(`box${i}`);
+      row.id = `box${i}`;
+
       // add function that makes the box an object that represents board
     }
+    // for (let i = 0; i < gamestate[0].length; i += 1) {
+
+    // }
+    // for each array inside the game state. make them equal x or o.
   };
+
   // return functions
   return {
     clear
