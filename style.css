@@ -11,13 +11,15 @@ h1 {
   justify-content: center;
 }
 
-.newgame {
+.newgame,
+.board {
   display: flex;
   align-items: center;
   justify-content: center;
+  background-color: aqua;
 }
 
-.newbtn {
+#newbtn {
   border-style: none;
   border: 2px black solid;
   color: white;
@@ -26,4 +28,21 @@ h1 {
   font-family: "Courier New", Courier, monospace;
   text-transform: uppercase;
   padding-top: 5px;
+}
+
+.board {
+  margin-top: 10px;
+}
+
+#game {
+  width: 420px;
+  height: 420px;
+
+  display: grid;
+  background-color: aquamarine;
+}
+
+.box {
+  background-color: rgb(255, 255, 255);
+  border: 3px rgb(2, 2, 2) solid;
 }
