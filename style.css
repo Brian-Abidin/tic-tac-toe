@@ -6,4 +6,24 @@ body {
 
 h1 {
   text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.newgame {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.newbtn {
+  border-style: none;
+  border: 2px black solid;
+  color: white;
+  background-color: rgb(10, 99, 202);
+  cursor: grab;
+  font-family: "Courier New", Courier, monospace;
+  text-transform: uppercase;
+  padding-top: 5px;
 }
