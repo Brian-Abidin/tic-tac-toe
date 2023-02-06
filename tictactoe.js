@@ -90,18 +90,26 @@ const gameBoard = (() => {
   const gamestate = gameboard().gamestate.board;
   console.log(gamestate[0].length);
   const clear = () => {
-    console.log(newPlayer().player1);
-    console.log(newPlayer().player2);
-    const node = document.getElementById("game");
-    node.querySelectorAll("*").forEach((n) => n.remove());
-    const box = document.getElementById("game");
-    const num = 3;
-    for (let i = 0; i < num * num; i += 1) {
-      const row = document.createElement("div");
-      box.style.gridTemplateColumns = `repeat(${num}, 1fr)`;
-      box.style.gridTemplateRows = `repeat(${num}, 1fr)`;
-      box.appendChild(row).classList.add(`box${i}`);
-      row.id = `box${i}`;
+    const notready = document.getElementById("notready");
+    const name1 = newPlayer().player1.name;
+    const name2 = newPlayer().player2.name;
+    if (name1 !== "" && name2 !== "") {
+      console.log(newPlayer().player1.name);
+      console.log(newPlayer().player2.name);
+      notready.style.display = "none";
+      const node = document.getElementById("game");
+      node.querySelectorAll("*").forEach((n) => n.remove());
+      const box = document.getElementById("game");
+      const num = 3;
+      for (let i = 0; i < num * num; i += 1) {
+        const row = document.createElement("div");
+        box.style.gridTemplateColumns = `repeat(${num}, 1fr)`;
+        box.style.gridTemplateRows = `repeat(${num}, 1fr)`;
+        box.appendChild(row).classList.add(`box${i}`);
+        row.id = `box${i}`;
+      }
+    } else {
+      notready.style.display = "block";
 
       // add function that makes the box an object that represents board
     }
@@ -119,6 +127,9 @@ const gameBoard = (() => {
 
 // gameboard controller module
 const gameController = (() => {
+  // controls the game
+  // Lets the user decide who goes first "X" or "O".
+
   const game = {
     board: [
       [0, 0, 0],
@@ -126,8 +137,9 @@ const gameController = (() => {
       [2, 2, 2]
     ]
   };
+  const box = document.get;
 
-  console.log(game.board[1][2]);
+  // console.log(game.board[1][2]);
 })();
 
 // function displayBoard() {
