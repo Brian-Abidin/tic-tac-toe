@@ -92,6 +92,7 @@ const gameBoard = (() => {
   const x = document.getElementById("symbolX");
   const o = document.getElementById("symbolO");
   const clear = () => {
+    console.log(gamestate1);
     const notready = document.getElementById("notready");
     const name1 = newPlayer().player1.name;
     const name2 = newPlayer().player2.name;
@@ -122,10 +123,14 @@ const gameBoard = (() => {
   const goingfirstX = () => {
     x.style.color = "green";
     o.style.color = "white";
+    gamestate1.gofirst = "x";
+    console.log(gamestate1);
   };
   const goingfirstO = () => {
     o.style.color = "green";
     x.style.color = "white";
+    gamestate1.gofirst = "o";
+    console.log(gamestate1);
   };
 
   // return functions
@@ -134,13 +139,18 @@ const gameBoard = (() => {
     goingfirstX,
     goingfirstO
   };
+  // when click change the gamestate symbol to the opposite symbol.
+  // for example x -> o when click
+  // another function that checkes if 3 in a row has been met
+  // if that criteria has been met dispaly winner and cease board
+  // functionality.
 })();
 
 // gameboard controller module
 const gameController = (() => {
   // controls the game
   // Lets the user decide who goes first "X" or "O".
-
+  const start = document.getElementById("newbtn");
   const game = {
     board: [
       [0, 0, 0],
