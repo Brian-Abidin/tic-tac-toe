@@ -31,6 +31,9 @@ h1 {
 
 .board {
   margin-top: 10px;
+  display: grid;
+  align-items: center;
+  justify-content: center;
 }
 
 #game {
@@ -50,9 +53,9 @@ h1 {
   margin-bottom: 10px;
 }
 
-.enter,
-.enter2 {
-  cursor: grab;
+#player1,
+#player2 {
+  width: fit-content;
 }
 
 #box0,
@@ -77,6 +80,9 @@ h1 {
 #readyp2 {
   color: green;
   margin-top: 5px;
+}
+#symbolX,
+#symbolO {
 }
 
 #notready {
