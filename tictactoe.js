@@ -87,16 +87,18 @@ function gameboard() {
 // gameboard module
 const gameBoard = (() => {
   gameboard();
-  const gamestate = gameboard().gamestate.board;
-  console.log(gamestate[0].length);
+  const gamestate1 = gameboard().gamestate;
+  console.log(gamestate1.board[1][1]);
+  const x = document.getElementById("symbolX");
+  const o = document.getElementById("symbolO");
   const clear = () => {
     const notready = document.getElementById("notready");
     const name1 = newPlayer().player1.name;
     const name2 = newPlayer().player2.name;
     if (name1 !== "" && name2 !== "") {
+      notready.style.display = "none";
       console.log(newPlayer().player1.name);
       console.log(newPlayer().player2.name);
-      notready.style.display = "none";
       const node = document.getElementById("game");
       node.querySelectorAll("*").forEach((n) => n.remove());
       const box = document.getElementById("game");
@@ -110,7 +112,6 @@ const gameBoard = (() => {
       }
     } else {
       notready.style.display = "block";
-
       // add function that makes the box an object that represents board
     }
     // for (let i = 0; i < gamestate[0].length; i += 1) {
@@ -118,10 +119,20 @@ const gameBoard = (() => {
     // }
     // for each array inside the game state. make them equal x or o.
   };
+  const goingfirstX = () => {
+    x.style.color = "green";
+    o.style.color = "white";
+  };
+  const goingfirstO = () => {
+    o.style.color = "green";
+    x.style.color = "white";
+  };
 
   // return functions
   return {
-    clear
+    clear,
+    goingfirstX,
+    goingfirstO
   };
 })();
 
