@@ -9,7 +9,7 @@
     <h1 class="title">Tic Tac Toe Game</h1>
     <div class="newgame">
       <div class="player1">
-        Player 1 "X"
+        Player 1: X
         <input
           type="text"
           name="player1"
@@ -19,7 +19,7 @@
         <div id="readyp1"></div>
       </div>
       <div class="player2">
-        Player 2 "O"
+        Player 2: O
         <input
           type="text"
           name="player2"
@@ -33,7 +33,9 @@
       <!--Could turn button inside a form to make players name each other first-->
     </div>
     <div class="board">
-      <div id="game"></div>
+      <div id="game">
+        <div id="notready">Please enter both player names before starting!</div>
+      </div>
     </div>
     <script src="tictactoe.js" defer></script>
   </body>
