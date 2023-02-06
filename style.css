@@ -67,11 +67,19 @@ h1 {
   background-color: rgb(255, 255, 255);
   border: 3px rgb(2, 2, 2) solid;
   cursor: grab;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 100px;
 }
 
 #readyp1,
 #readyp2 {
-  display: block;
   color: green;
   margin-top: 5px;
+}
+
+#notready {
+  color: red;
+  display: none;
 }
