@@ -88,7 +88,8 @@ function gameboard() {
 const gameBoard = (() => {
   gameboard();
   const gamestate1 = gameboard().gamestate;
-  console.log(gamestate1.board[1][1]);
+  // const gamelength = gamestate.board.length;
+  console.log(gamestate1);
   const x = document.getElementById("symbolX");
   const o = document.getElementById("symbolO");
   const clear = () => {
@@ -110,15 +111,19 @@ const gameBoard = (() => {
         box.style.gridTemplateRows = `repeat(${num}, 1fr)`;
         box.appendChild(row).classList.add(`box${i}`);
         row.id = `box${i}`;
+        const newbox = document.getElementById(`box${i}`);
+        newbox.onclick = function symbol() {
+          if (gamestate1.gofirst === "x") {
+            newbox.textContent = "x";
+          } else {
+            newbox.textContent = "o";
+          }
+        };
       }
     } else {
       notready.style.display = "block";
       // add function that makes the box an object that represents board
     }
-    // for (let i = 0; i < gamestate[0].length; i += 1) {
-
-    // }
-    // for each array inside the game state. make them equal x or o.
   };
   const goingfirstX = () => {
     x.style.color = "green";
@@ -132,12 +137,17 @@ const gameBoard = (() => {
     gamestate1.gofirst = "o";
     console.log(gamestate1);
   };
+  const addsymbol = () => {
+    const element = document.getElementById("box1");
+    element.textContent = "X";
+  };
 
   // return functions
   return {
     clear,
     goingfirstX,
-    goingfirstO
+    goingfirstO,
+    addsymbol
   };
   // when click change the gamestate symbol to the opposite symbol.
   // for example x -> o when click
