@@ -92,13 +92,17 @@ const gameBoard = (() => {
   console.log(gamestate1);
   const x = document.getElementById("symbolX");
   const o = document.getElementById("symbolO");
-  const clear = () => {
+  const info = document.getElementById("playernames");
+  const newbutton = document.getElementById("newbtn");
+  const newgame = () => {
     console.log(gamestate1);
     const notready = document.getElementById("notready");
     const name1 = newPlayer().player1.name;
     const name2 = newPlayer().player2.name;
     if (name1 !== "" && name2 !== "") {
       notready.style.display = "none";
+      info.style.display = "none";
+      newbutton.style.display = "none";
       console.log(newPlayer().player1.name);
       console.log(newPlayer().player2.name);
       const node = document.getElementById("game");
@@ -115,8 +119,10 @@ const gameBoard = (() => {
         newbox.onclick = function symbol() {
           if (gamestate1.gofirst === "x" && newbox.textContent === "") {
             newbox.textContent = "x";
+            gamestate1.next = "o";
           } else if (gamestate1.gofirst === "o" && newbox.textContent === "") {
             newbox.textContent = "o";
+            gamestate1.next = "x";
           }
         };
       }
@@ -126,28 +132,46 @@ const gameBoard = (() => {
     }
   };
   const goingfirstX = () => {
-    x.style.color = "green";
-    o.style.color = "white";
-    gamestate1.gofirst = "x";
-    console.log(gamestate1);
+    const boxexists = document.getElementById("box1");
+    if (boxexists === null) {
+      x.style.color = "green";
+      o.style.color = "white";
+      gamestate1.gofirst = "x";
+      gamestate1.next = "x";
+      console.log(gamestate1);
+    } else {
+      // do nothing
+    }
   };
   const goingfirstO = () => {
-    o.style.color = "green";
-    x.style.color = "white";
-    gamestate1.gofirst = "o";
-    console.log(gamestate1);
+    const boxexists = document.getElementById("box1");
+    if (boxexists === null) {
+      o.style.color = "green";
+      x.style.color = "white";
+      gamestate1.next = "o";
+      gamestate1.gofirst = "o";
+      console.log(gamestate1);
+    } else {
+      // do nothing
+    }
   };
-  const addsymbol = () => {
-    const element = document.getElementById("box1");
-    element.textContent = "X";
+  const reset = () => {
+    const node = document.getElementById("game");
+    node.querySelectorAll("*").forEach((n) => n.remove());
+    info.style.display = "block";
+    newbutton.style.display = "block";
+    newPlayer().player1.name = "";
+    newPlayer().player2.name = "";
+    document.getElementById("player1").value = "";
+    document.getElementById("player2").value = "";
   };
 
   // return functions
   return {
-    clear,
+    newgame,
     goingfirstX,
     goingfirstO,
-    addsymbol
+    reset
   };
   // when click change the gamestate symbol to the opposite symbol.
   // for example x -> o when click
