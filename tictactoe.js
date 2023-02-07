@@ -94,12 +94,14 @@ const gameBoard = (() => {
   const o = document.getElementById("symbolO");
   const info = document.getElementById("playernames");
   const newbutton = document.getElementById("newbtn");
+  const resetbutton = document.getElementById("reset");
   const newgame = () => {
     console.log(gamestate1);
     const notready = document.getElementById("notready");
     const name1 = newPlayer().player1.name;
     const name2 = newPlayer().player2.name;
     if (name1 !== "" && name2 !== "") {
+      resetbutton.style.display = "block";
       notready.style.display = "none";
       info.style.display = "none";
       newbutton.style.display = "none";
@@ -164,6 +166,7 @@ const gameBoard = (() => {
     newPlayer().player2.name = "";
     document.getElementById("player1").value = "";
     document.getElementById("player2").value = "";
+    resetbutton.style.display = "none";
   };
 
   // return functions
