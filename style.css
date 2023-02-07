@@ -89,3 +89,7 @@ h1 {
   color: red;
   display: none;
 }
+
+#reset {
+  display: none;
+}
