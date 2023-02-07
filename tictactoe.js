@@ -113,9 +113,9 @@ const gameBoard = (() => {
         row.id = `box${i}`;
         const newbox = document.getElementById(`box${i}`);
         newbox.onclick = function symbol() {
-          if (gamestate1.gofirst === "x") {
+          if (gamestate1.gofirst === "x" && newbox.textContent === "") {
             newbox.textContent = "x";
-          } else {
+          } else if (gamestate1.gofirst === "o" && newbox.textContent === "") {
             newbox.textContent = "o";
           }
         };
