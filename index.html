@@ -8,7 +8,7 @@
   <body>
     <h1 class="title">Tic Tac Toe Game</h1>
     <div class="newgame">
-      <div class="playernames">
+      <div id="playernames">
         <div class="player1">
           Player 1: X
           <input
@@ -29,14 +29,15 @@
           />
           <div id="readyp2"></div>
         </div>
+        <div class="gofirst">
+          Who would like to go first?
+          <button id="symbolX" onclick="gameBoard.goingfirstX()">X</button>
+          <button id="symbolO" onclick="gameBoard.goingfirstO()">O</button>
+        </div>
       </div>
-      <div class="gofirst">
-        Who would like to go first?
-        <button id="symbolX" onclick="gameBoard.goingfirstX()">X</button>
-        <button id="symbolO" onclick="gameBoard.goingfirstO()">O</button>
-      </div>
-      <button id="newbtn" onclick="gameBoard.clear()">New Game</button>
+      <button id="newbtn" onclick="gameBoard.newgame()">New Game</button>
       <!--Could turn button inside a form to make players name each other first-->
+      <button id="reset" onclick="gameBoard.reset()">Reset</button>
     </div>
     <div class="board">
       <div id="notready">Please enter both player names before starting!</div>
