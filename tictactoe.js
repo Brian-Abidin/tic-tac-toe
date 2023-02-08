@@ -237,12 +237,105 @@ const gameBoard = (() => {
     turnplayer.style.fontSize = "30px";
     turnplayer.style.color = "Green";
   };
+  const iswinner = () => {
+    switch ("xxx") {
+      case gamestate1.board[0][0] +
+        gamestate1.board[0][1] +
+        gamestate1.board[0][2]:
+        winnerX();
+        break;
+      case gamestate1.board[1][0] +
+        gamestate1.board[1][1] +
+        gamestate1.board[1][2]:
+        winnerX();
+        break;
+      case gamestate1.board[2][0] +
+        gamestate1.board[2][1] +
+        gamestate1.board[2][2]:
+        winnerX();
+        break;
+      case gamestate1.board[0][0] +
+        gamestate1.board[1][0] +
+        gamestate1.board[2][0]:
+        winnerX();
+        break;
+      case gamestate1.board[0][1] +
+        gamestate1.board[1][1] +
+        gamestate1.board[2][1]:
+        winnerX();
+        break;
+      case gamestate1.board[0][2] +
+        gamestate1.board[1][2] +
+        gamestate1.board[2][2]:
+        winnerX();
+        break;
+      case gamestate1.board[0][0] +
+        gamestate1.board[1][1] +
+        gamestate1.board[2][2]:
+        winnerX();
+        break;
+      case gamestate1.board[0][2] +
+        gamestate1.board[1][1] +
+        gamestate1.board[2][0]:
+        winnerX();
+        break;
+      default:
+      // do nothing
+    }
+    switch ("ooo") {
+      case gamestate1.board[0][0] +
+        gamestate1.board[0][1] +
+        gamestate1.board[0][2]:
+        winnerO();
+        break;
+      case gamestate1.board[1][0] +
+        gamestate1.board[1][1] +
+        gamestate1.board[1][2]:
+        winnerO();
+        break;
+      case gamestate1.board[2][0] +
+        gamestate1.board[2][1] +
+        gamestate1.board[2][2]:
+        winnerO();
+        break;
+      case gamestate1.board[0][0] +
+        gamestate1.board[1][0] +
+        gamestate1.board[2][0]:
+        winnerO();
+        break;
+      case gamestate1.board[0][1] +
+        gamestate1.board[1][1] +
+        gamestate1.board[2][1]:
+        winnerO();
+        break;
+      case gamestate1.board[0][2] +
+        gamestate1.board[1][2] +
+        gamestate1.board[2][2]:
+        winnerO();
+        break;
+      case gamestate1.board[0][0] +
+        gamestate1.board[1][1] +
+        gamestate1.board[2][2]:
+        winnerO();
+        break;
+      case gamestate1.board[0][2] +
+        gamestate1.board[1][1] +
+        gamestate1.board[2][0]:
+        winnerO();
+        break;
+      default:
+      // do nothing
+    }
+  };
   game.onclick = function checkwin() {
     const name1 = newPlayer().player1.name;
     const name2 = newPlayer().player2.name;
     let divnum = 0;
     let emptyspace = 0;
-    if (turnplayer.textContent.includes("Winner!")) {
+    if (
+      turnplayer.textContent.includes("Winner") ||
+      turnplayer.textContent.includes("Draw")
+    ) {
       // do nothing
     } else {
       for (let i = 0; i < 3; i += 1) {
@@ -261,102 +354,20 @@ const gameBoard = (() => {
 
       if (gamestate1.next === "x" && emptyspace > 0) {
         turnplayer.textContent = `It is ${name1}'s turn place your x!`;
+        iswinner();
       } else if (gamestate1.next === "o" && emptyspace > 0) {
         turnplayer.textContent = `It is ${name2}'s turn place your o!`;
-      } else if (emptyspace === 0) {
-        turnplayer.style.fontSize = "30px";
-        turnplayer.style.color = "Orange";
-        turnplayer.textContent = "It's a Draw!";
-        return;
+        iswinner();
       }
-
-      switch ("xxx") {
-        case gamestate1.board[0][0] +
-          gamestate1.board[0][1] +
-          gamestate1.board[0][2]:
-          winnerX();
-          break;
-        case gamestate1.board[1][0] +
-          gamestate1.board[1][1] +
-          gamestate1.board[1][2]:
-          winnerX();
-          break;
-        case gamestate1.board[2][0] +
-          gamestate1.board[2][1] +
-          gamestate1.board[2][2]:
-          winnerX();
-          break;
-        case gamestate1.board[0][0] +
-          gamestate1.board[1][0] +
-          gamestate1.board[2][0]:
-          winnerX();
-          break;
-        case gamestate1.board[0][1] +
-          gamestate1.board[1][1] +
-          gamestate1.board[2][1]:
-          winnerX();
-          break;
-        case gamestate1.board[0][2] +
-          gamestate1.board[1][2] +
-          gamestate1.board[2][2]:
-          winnerX();
-          break;
-        case gamestate1.board[0][0] +
-          gamestate1.board[1][1] +
-          gamestate1.board[2][2]:
-          winnerX();
-          break;
-        case gamestate1.board[0][2] +
-          gamestate1.board[1][1] +
-          gamestate1.board[2][0]:
-          winnerX();
-          break;
-        default:
-        // do nothing
-      }
-      switch ("ooo") {
-        case gamestate1.board[0][0] +
-          gamestate1.board[0][1] +
-          gamestate1.board[0][2]:
-          winnerO();
-          break;
-        case gamestate1.board[1][0] +
-          gamestate1.board[1][1] +
-          gamestate1.board[1][2]:
-          winnerO();
-          break;
-        case gamestate1.board[2][0] +
-          gamestate1.board[2][1] +
-          gamestate1.board[2][2]:
-          winnerO();
-          break;
-        case gamestate1.board[0][0] +
-          gamestate1.board[1][0] +
-          gamestate1.board[2][0]:
-          winnerO();
-          break;
-        case gamestate1.board[0][1] +
-          gamestate1.board[1][1] +
-          gamestate1.board[2][1]:
-          winnerO();
-          break;
-        case gamestate1.board[0][2] +
-          gamestate1.board[1][2] +
-          gamestate1.board[2][2]:
-          winnerO();
-          break;
-        case gamestate1.board[0][0] +
-          gamestate1.board[1][1] +
-          gamestate1.board[2][2]:
-          winnerO();
-          break;
-        case gamestate1.board[0][2] +
-          gamestate1.board[1][1] +
-          gamestate1.board[2][0]:
-          winnerO();
-          break;
-        default:
-        // do nothing
+      if (emptyspace === 0) {
+        iswinner();
+        if (turnplayer.textContent.includes("Winner!")) {
+          // do nothing
+        } else {
+          turnplayer.style.fontSize = "30px";
+          turnplayer.style.color = "Orange";
+          turnplayer.textContent = "It's a Draw!";
+        }
       }
     }
   };
@@ -365,6 +376,7 @@ const gameBoard = (() => {
   return {
     winnerO,
     winnerX,
+    iswinner,
     fillarray,
     goingfirstX,
     goingfirstO,
