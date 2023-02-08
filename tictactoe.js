@@ -110,9 +110,13 @@ const gameBoard = (() => {
       gamestate1.gofirst === "o"
     ) {
       resetbutton.style.display = "block";
+      game.style.display = "grid";
+      turnplayer.style.display = "grid";
+
       notready.style.display = "none";
       info.style.display = "none";
       newbutton.style.display = "none";
+
       console.log(newPlayer().player1.name);
       console.log(newPlayer().player2.name);
       game.querySelectorAll("*").forEach((n) => n.remove());
@@ -125,16 +129,10 @@ const gameBoard = (() => {
         row.id = `box${i}`;
         const newbox = document.getElementById(`box${i}`);
         newbox.onclick = function symbol() {
-          if (
-            (gamestate1.gofirst === "x" && newbox.textContent === "") ||
-            gamestate1.next === "x"
-          ) {
+          if (newbox.textContent === "" && gamestate1.next === "x") {
             newbox.textContent = "x";
             gamestate1.next = "o";
-          } else if (
-            (gamestate1.gofirst === "o" && newbox.textContent === "") ||
-            gamestate1.next === "o"
-          ) {
+          } else if (newbox.textContent === "" && gamestate1.next === "o") {
             newbox.textContent = "o";
             gamestate1.next = "x";
           }
@@ -187,7 +185,9 @@ const gameBoard = (() => {
     readytext.style.color = "red";
     readytext2.style.color = "red";
 
+    game.style.display = "none";
     resetbutton.style.display = "none";
+    turnplayer.style.display = "none";
 
     gamestate1.next = "";
     gamestate1.gofirst = "";
