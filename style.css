@@ -39,7 +39,7 @@ h1 {
 #game {
   width: 420px;
   height: 420px;
-  display: grid;
+  display: none;
 }
 
 .newgame {
@@ -92,4 +92,8 @@ h1 {
 
 #reset {
   display: none;
+}
+
+#turnplayer {
+  text-align: center;
 }
