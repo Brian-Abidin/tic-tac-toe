@@ -1,19 +1,3 @@
-// store gameboard as an array in side of gameboard object
-// 4 main objects: Gameboard, Player 1, Player 2,
-// and control flow of game
-// have as little global code as possible.
-// when you need multiples of something, create factories
-// when you need 1 of something, create modules
-// write a javascript function that renders the contents of the
-// gameboard array to the webpage.
-// build functions that allows players to mark specific spots
-// tie the spots to the DOM, letting players click on gameboard to
-// mark. Once a spot is taken cannot be marked.
-// check for when game is over, check for 3 in a row.
-// interface: allow players to put their name, 2 buttons
-// start and restart. and a display to congratulate winner.
-
-// function factory creates objects as new players
 function newPlayer() {
   const pname = document.getElementById("player1").value;
   const pname2 = document.getElementById("player2").value;
@@ -51,19 +35,6 @@ function newPlayer() {
   };
 }
 
-// function updatePlayer() {
-//   const player1 = newPlayer(document.getElementById("player1").value);
-//   console.log(player1);
-//   const player2 = newPlayer(document.getElementById("player2").value);
-//   console.log(player2);
-// }
-
-console.log(newPlayer().player1);
-// input player name and on enter stores the name and symbol
-
-// console.log(p1name);
-// console.log(you);
-
 // create a function that represents the gameboard with an array
 function gameboard() {
   // create board
@@ -79,17 +50,14 @@ function gameboard() {
   return {
     gamestate
   };
-
-  // console.log(game.board[1][2]);
-  // displays gameboard over webpage
 }
 
 // gameboard module
 const gameBoard = (() => {
+  // get gameboard function
   gameboard();
   const gamestate1 = gameboard().gamestate;
-  // const gamelength = gamestate.board.length;
-  console.log(gamestate1);
+
   // variables
   const game = document.getElementById("game");
   const x = document.getElementById("symbolX");
@@ -114,6 +82,8 @@ const gameBoard = (() => {
       }
     }
   };
+
+  // function when newgame button is clicked
   newbutton.onclick = function newgame() {
     console.log(gamestate1.gofirst);
     const name1 = newPlayer().player1.name;
@@ -168,10 +138,11 @@ const gameBoard = (() => {
       }
     } else {
       notready.style.display = "block";
-      // add function that makes the box an object that represents board
     }
     fillarray();
   };
+
+  // if "X" goes first
   const goingfirstX = () => {
     const boxexists = document.getElementById("box1");
     if (boxexists === null) {
@@ -184,6 +155,8 @@ const gameBoard = (() => {
       // do nothing
     }
   };
+
+  // if "O" goes first
   const goingfirstO = () => {
     const boxexists = document.getElementById("box1");
     if (boxexists === null) {
@@ -196,6 +169,8 @@ const gameBoard = (() => {
       // do nothing
     }
   };
+
+  // reset function
   const reset = () => {
     const node = document.getElementById("game");
     node.querySelectorAll("*").forEach((n) => n.remove());
@@ -225,18 +200,24 @@ const gameBoard = (() => {
     o.style.color = "";
     x.style.color = "";
   };
+
+  // if "X" wins function
   const winnerX = () => {
     const name1 = newPlayer().player1.name;
     turnplayer.textContent = `${name1}'s the Winner!`;
     turnplayer.style.fontSize = "30px";
     turnplayer.style.color = "Green";
   };
+
+  // if "O" wins function
   const winnerO = () => {
     const name2 = newPlayer().player2.name;
     turnplayer.textContent = `${name2}'s the Winner!`;
     turnplayer.style.fontSize = "30px";
     turnplayer.style.color = "Green";
   };
+
+  // checks if winner function
   const iswinner = () => {
     switch ("xxx") {
       case gamestate1.board[0][0] +
@@ -327,6 +308,8 @@ const gameBoard = (() => {
       // do nothing
     }
   };
+
+  // game function
   game.onclick = function checkwin() {
     const name1 = newPlayer().player1.name;
     const name2 = newPlayer().player2.name;
@@ -382,42 +365,20 @@ const gameBoard = (() => {
     goingfirstO,
     reset
   };
-  // when click change the gamestate symbol to the opposite symbol.
-  // for example x -> o when click
-  // another function that checkes if 3 in a row has been met
-  // if that criteria has been met dispaly winner and cease board
-  // functionality.
 })();
 
-// gameboard controller module
-const gameController = (() => {
-  // controls the game
-  // Lets the user decide who goes first "X" or "O".
-  const start = document.getElementById("newbtn");
-  const game = {
-    board: [
-      [0, 0, 0],
-      [1, 1, 1],
-      [2, 2, 2]
-    ]
-  };
-  const box = document.get;
-
-  // console.log(game.board[1][2]);
-})();
-
-// function displayBoard() {
-//   // diplsay a 3x3 grid
-//   // each box represents a section of the board array
-//   const node = document.getElementById("game");
-//   node.querySelectorAll("*").forEach((n) => n.remove());
-//   const box = document.getElementById("game");
-//   const num = 3;
-//   for (let i = 0; i < num * num; i += 1) {
-//     const row = document.createElement("div");
-//     box.style.gridTemplateColumns = `repeat(${num}, 1fr)`;
-//     box.style.gridTemplateRows = `repeat(${num}, 1fr)`;
-//     box.appendChild(row).classList.add(`box${i}`);
-//     // add function that makes the box an object that represents board
-//   }
-// }
+// store gameboard as an array in side of gameboard object
+// 4 main objects: Gameboard, Player 1, Player 2,
+// and control flow of game
+// have as little global code as possible.
+// when you need multiples of something, create factories
+// when you need 1 of something, create modules
+// write a javascript function that renders the contents of the
+// gameboard array to the webpage.
+// build functions that allows players to mark specific spots
+// tie the spots to the DOM, letting players click on gameboard to
+// mark. Once a spot is taken cannot be marked.
+// check for when game is over, check for 3 in a row.
+// interface: allow players to put their name, 2 buttons
+// start and restart. and a display to congratulate winner.
+// function factory creates objects as new players
