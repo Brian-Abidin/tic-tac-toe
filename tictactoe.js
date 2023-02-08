@@ -90,17 +90,25 @@ const gameBoard = (() => {
   const gamestate1 = gameboard().gamestate;
   // const gamelength = gamestate.board.length;
   console.log(gamestate1);
+  // variables
+
   const x = document.getElementById("symbolX");
   const o = document.getElementById("symbolO");
   const info = document.getElementById("playernames");
   const newbutton = document.getElementById("newbtn");
   const resetbutton = document.getElementById("reset");
+  const readytext = document.getElementById("readyp1");
+  const readytext2 = document.getElementById("readyp2");
+  // new newgame function
   const newgame = () => {
-    console.log(gamestate1);
+    console.log(gamestate1.gofirst);
     const notready = document.getElementById("notready");
     const name1 = newPlayer().player1.name;
     const name2 = newPlayer().player2.name;
-    if (name1 !== "" && name2 !== "") {
+    if (
+      (name1 !== "" && name2 !== "" && gamestate1.gofirst === "x") ||
+      gamestate1.gofirst === "o"
+    ) {
       resetbutton.style.display = "block";
       notready.style.display = "none";
       info.style.display = "none";
@@ -160,12 +168,21 @@ const gameBoard = (() => {
   const reset = () => {
     const node = document.getElementById("game");
     node.querySelectorAll("*").forEach((n) => n.remove());
+
     info.style.display = "block";
     newbutton.style.display = "block";
+
     newPlayer().player1.name = "";
     newPlayer().player2.name = "";
+
     document.getElementById("player1").value = "";
     document.getElementById("player2").value = "";
+
+    readytext.textContent = "Player 1 is not ready!";
+    readytext2.textContent = "Player 2 is not ready!";
+    readytext.style.color = "red";
+    readytext2.style.color = "red";
+
     resetbutton.style.display = "none";
   };
 
