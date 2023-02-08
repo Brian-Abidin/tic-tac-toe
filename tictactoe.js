@@ -91,7 +91,7 @@ const gameBoard = (() => {
   // const gamelength = gamestate.board.length;
   console.log(gamestate1);
   // variables
-
+  const game = document.getElementById("game");
   const x = document.getElementById("symbolX");
   const o = document.getElementById("symbolO");
   const info = document.getElementById("playernames");
@@ -99,10 +99,10 @@ const gameBoard = (() => {
   const resetbutton = document.getElementById("reset");
   const readytext = document.getElementById("readyp1");
   const readytext2 = document.getElementById("readyp2");
+  const turnplayer = document.getElementById("turnplayer");
   // new newgame function
   const newgame = () => {
     console.log(gamestate1.gofirst);
-    const notready = document.getElementById("notready");
     const name1 = newPlayer().player1.name;
     const name2 = newPlayer().player2.name;
     if (
@@ -115,22 +115,26 @@ const gameBoard = (() => {
       newbutton.style.display = "none";
       console.log(newPlayer().player1.name);
       console.log(newPlayer().player2.name);
-      const node = document.getElementById("game");
-      node.querySelectorAll("*").forEach((n) => n.remove());
-      const box = document.getElementById("game");
+      game.querySelectorAll("*").forEach((n) => n.remove());
       const num = 3;
       for (let i = 0; i < num * num; i += 1) {
         const row = document.createElement("div");
-        box.style.gridTemplateColumns = `repeat(${num}, 1fr)`;
-        box.style.gridTemplateRows = `repeat(${num}, 1fr)`;
-        box.appendChild(row).classList.add(`box${i}`);
+        game.style.gridTemplateColumns = `repeat(${num}, 1fr)`;
+        game.style.gridTemplateRows = `repeat(${num}, 1fr)`;
+        game.appendChild(row).classList.add(`box${i}`);
         row.id = `box${i}`;
         const newbox = document.getElementById(`box${i}`);
         newbox.onclick = function symbol() {
-          if (gamestate1.gofirst === "x" && newbox.textContent === "") {
+          if (
+            (gamestate1.gofirst === "x" && newbox.textContent === "") ||
+            gamestate1.next === "x"
+          ) {
             newbox.textContent = "x";
             gamestate1.next = "o";
-          } else if (gamestate1.gofirst === "o" && newbox.textContent === "") {
+          } else if (
+            (gamestate1.gofirst === "o" && newbox.textContent === "") ||
+            gamestate1.next === "o"
+          ) {
             newbox.textContent = "o";
             gamestate1.next = "x";
           }
@@ -184,6 +188,21 @@ const gameBoard = (() => {
     readytext2.style.color = "red";
 
     resetbutton.style.display = "none";
+
+    gamestate1.next = "";
+    gamestate1.gofirst = "";
+    o.style.color = "";
+    x.style.color = "";
+  };
+
+  game.onclick = function turn() {
+    const name1 = newPlayer().player1.name;
+    const name2 = newPlayer().player2.name;
+    if (gamestate1.next === "x") {
+      turnplayer.textContent = `it is${name1}'s turn place your x!`;
+    } else if (gamestate1.next === "o") {
+      turnplayer.textContent = `it is${name2}'s turn place your o!`;
+    }
   };
 
   // return functions
