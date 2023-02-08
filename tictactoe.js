@@ -149,10 +149,18 @@ const gameBoard = (() => {
         row.id = `box${i}`;
         const newbox = document.getElementById(`box${i}`);
         newbox.onclick = function symbol() {
-          if (newbox.textContent === "" && gamestate1.next === "x") {
+          if (
+            newbox.textContent === "" &&
+            gamestate1.next === "x" &&
+            turnplayer.textContent.includes("turn")
+          ) {
             newbox.textContent = "x";
             gamestate1.next = "o";
-          } else if (newbox.textContent === "" && gamestate1.next === "o") {
+          } else if (
+            newbox.textContent === "" &&
+            gamestate1.next === "o" &&
+            turnplayer.textContent.includes("turn")
+          ) {
             newbox.textContent = "o";
             gamestate1.next = "x";
           }
@@ -209,6 +217,8 @@ const gameBoard = (() => {
     game.style.display = "none";
     resetbutton.style.display = "none";
     turnplayer.style.display = "none";
+    turnplayer.style.fontSize = "medium";
+    turnplayer.style.color = "black";
 
     gamestate1.next = "";
     gamestate1.gofirst = "";
@@ -218,134 +228,143 @@ const gameBoard = (() => {
   const winnerX = () => {
     const name1 = newPlayer().player1.name;
     turnplayer.textContent = `${name1}'s the Winner!`;
+    turnplayer.style.fontSize = "30px";
+    turnplayer.style.color = "Green";
   };
   const winnerO = () => {
     const name2 = newPlayer().player2.name;
     turnplayer.textContent = `${name2}'s the Winner!`;
+    turnplayer.style.fontSize = "30px";
+    turnplayer.style.color = "Green";
   };
   game.onclick = function checkwin() {
     const name1 = newPlayer().player1.name;
     const name2 = newPlayer().player2.name;
-
     let divnum = 0;
     let emptyspace = 0;
-
-    for (let i = 0; i < 3; i += 1) {
-      for (let j = 0; j < 3; j += 1) {
-        const newbox = document.getElementById(`box${divnum}`);
-        gamestate1.board[j][i] = newbox.textContent;
-        if (gamestate1.board[j][i] === "") {
-          emptyspace += 1;
+    if (turnplayer.textContent.includes("Winner!")) {
+      // do nothing
+    } else {
+      for (let i = 0; i < 3; i += 1) {
+        for (let j = 0; j < 3; j += 1) {
+          const newbox = document.getElementById(`box${divnum}`);
+          gamestate1.board[j][i] = newbox.textContent;
+          if (gamestate1.board[j][i] === "") {
+            emptyspace += 1;
+          }
+          console.log("this is l", emptyspace);
+          divnum += 1;
+          console.log(divnum);
+          console.log(gamestate1.board[j][i]);
         }
-        console.log("this is l", emptyspace);
-        divnum += 1;
-        console.log(divnum);
-        console.log(gamestate1.board[j][i]);
       }
-    }
 
-    if (gamestate1.next === "x" && emptyspace > 0) {
-      turnplayer.textContent = `It is ${name1}'s turn place your x!`;
-    } else if (gamestate1.next === "o" && emptyspace > 0) {
-      turnplayer.textContent = `It is ${name2}'s turn place your o!`;
-    } else if (emptyspace === 0) {
-      turnplayer.textContent = "It's a Draw!";
-    }
+      if (gamestate1.next === "x" && emptyspace > 0) {
+        turnplayer.textContent = `It is ${name1}'s turn place your x!`;
+      } else if (gamestate1.next === "o" && emptyspace > 0) {
+        turnplayer.textContent = `It is ${name2}'s turn place your o!`;
+      } else if (emptyspace === 0) {
+        turnplayer.style.fontSize = "30px";
+        turnplayer.style.color = "Orange";
+        turnplayer.textContent = "It's a Draw!";
+        return;
+      }
 
-    switch ("xxx") {
-      case gamestate1.board[0][0] +
-        gamestate1.board[0][1] +
-        gamestate1.board[0][2]:
-        winnerX();
-        break;
-      case gamestate1.board[1][0] +
-        gamestate1.board[1][1] +
-        gamestate1.board[1][2]:
-        winnerX();
-        break;
-      case gamestate1.board[2][0] +
-        gamestate1.board[2][1] +
-        gamestate1.board[2][2]:
-        winnerX();
-        break;
-      case gamestate1.board[0][0] +
-        gamestate1.board[1][0] +
-        gamestate1.board[2][0]:
-        winnerX();
-        break;
-      case gamestate1.board[0][1] +
-        gamestate1.board[1][1] +
-        gamestate1.board[2][1]:
-        winnerX();
-        break;
-      case gamestate1.board[0][2] +
-        gamestate1.board[1][2] +
-        gamestate1.board[2][2]:
-        winnerX();
-        break;
-      case gamestate1.board[0][0] +
-        gamestate1.board[1][1] +
-        gamestate1.board[2][2]:
-        winnerX();
-        break;
-      case gamestate1.board[0][2] +
-        gamestate1.board[1][1] +
-        gamestate1.board[2][0]:
-        winnerX();
-        break;
-      default:
-      // do nothing
-    }
-    switch ("ooo") {
-      case gamestate1.board[0][0] +
-        gamestate1.board[0][1] +
-        gamestate1.board[0][2]:
-        winnerO();
-        break;
-      case gamestate1.board[1][0] +
-        gamestate1.board[1][1] +
-        gamestate1.board[1][2]:
-        winnerO();
-        break;
-      case gamestate1.board[2][0] +
-        gamestate1.board[2][1] +
-        gamestate1.board[2][2]:
-        winnerO();
-        break;
-      case gamestate1.board[0][0] +
-        gamestate1.board[1][0] +
-        gamestate1.board[2][0]:
-        winnerO();
-        break;
-      case gamestate1.board[0][1] +
-        gamestate1.board[1][1] +
-        gamestate1.board[2][1]:
-        winnerO();
-        break;
-      case gamestate1.board[0][2] +
-        gamestate1.board[1][2] +
-        gamestate1.board[2][2]:
-        winnerO();
-        break;
-      case gamestate1.board[0][0] +
-        gamestate1.board[1][1] +
-        gamestate1.board[2][2]:
-        winnerO();
-        break;
-      case gamestate1.board[0][2] +
-        gamestate1.board[1][1] +
-        gamestate1.board[2][0]:
-        winnerO();
-        break;
-      default:
-      // do nothing
+      switch ("xxx") {
+        case gamestate1.board[0][0] +
+          gamestate1.board[0][1] +
+          gamestate1.board[0][2]:
+          winnerX();
+          break;
+        case gamestate1.board[1][0] +
+          gamestate1.board[1][1] +
+          gamestate1.board[1][2]:
+          winnerX();
+          break;
+        case gamestate1.board[2][0] +
+          gamestate1.board[2][1] +
+          gamestate1.board[2][2]:
+          winnerX();
+          break;
+        case gamestate1.board[0][0] +
+          gamestate1.board[1][0] +
+          gamestate1.board[2][0]:
+          winnerX();
+          break;
+        case gamestate1.board[0][1] +
+          gamestate1.board[1][1] +
+          gamestate1.board[2][1]:
+          winnerX();
+          break;
+        case gamestate1.board[0][2] +
+          gamestate1.board[1][2] +
+          gamestate1.board[2][2]:
+          winnerX();
+          break;
+        case gamestate1.board[0][0] +
+          gamestate1.board[1][1] +
+          gamestate1.board[2][2]:
+          winnerX();
+          break;
+        case gamestate1.board[0][2] +
+          gamestate1.board[1][1] +
+          gamestate1.board[2][0]:
+          winnerX();
+          break;
+        default:
+        // do nothing
+      }
+      switch ("ooo") {
+        case gamestate1.board[0][0] +
+          gamestate1.board[0][1] +
+          gamestate1.board[0][2]:
+          winnerO();
+          break;
+        case gamestate1.board[1][0] +
+          gamestate1.board[1][1] +
+          gamestate1.board[1][2]:
+          winnerO();
+          break;
+        case gamestate1.board[2][0] +
+          gamestate1.board[2][1] +
+          gamestate1.board[2][2]:
+          winnerO();
+          break;
+        case gamestate1.board[0][0] +
+          gamestate1.board[1][0] +
+          gamestate1.board[2][0]:
+          winnerO();
+          break;
+        case gamestate1.board[0][1] +
+          gamestate1.board[1][1] +
+          gamestate1.board[2][1]:
+          winnerO();
+          break;
+        case gamestate1.board[0][2] +
+          gamestate1.board[1][2] +
+          gamestate1.board[2][2]:
+          winnerO();
+          break;
+        case gamestate1.board[0][0] +
+          gamestate1.board[1][1] +
+          gamestate1.board[2][2]:
+          winnerO();
+          break;
+        case gamestate1.board[0][2] +
+          gamestate1.board[1][1] +
+          gamestate1.board[2][0]:
+          winnerO();
+          break;
+        default:
+        // do nothing
+      }
     }
   };
 
   // return functions
   return {
-    winnerX,
     winnerO,
+    winnerX,
     fillarray,
     goingfirstX,
     goingfirstO,
