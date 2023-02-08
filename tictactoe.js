@@ -215,69 +215,83 @@ const gameBoard = (() => {
     o.style.color = "";
     x.style.color = "";
   };
+  const winnerX = () => {
+    const name1 = newPlayer().player1.name;
+    turnplayer.textContent = `${name1}'s the Winner!`;
+  };
+  const winnerO = () => {
+    const name2 = newPlayer().player2.name;
+    turnplayer.textContent = `${name2}'s the Winner!`;
+  };
   game.onclick = function checkwin() {
     const name1 = newPlayer().player1.name;
     const name2 = newPlayer().player2.name;
-    if (gamestate1.next === "x") {
-      turnplayer.textContent = `It is ${name1}'s turn place your x!`;
-    } else if (gamestate1.next === "o") {
-      turnplayer.textContent = `It is ${name2}'s turn place your o!`;
-    }
-    if (gamestate1.board.includes("")) {
-      // do nothing
-    } else {
-      turnplayer.textContent = "It's a Draw!";
-    }
-    let k = 0;
+
+    let divnum = 0;
+    let emptyspace = 0;
+
     for (let i = 0; i < 3; i += 1) {
       for (let j = 0; j < 3; j += 1) {
-        const newbox = document.getElementById(`box${k}`);
+        const newbox = document.getElementById(`box${divnum}`);
         gamestate1.board[j][i] = newbox.textContent;
-        k += 1;
-        console.log(k);
+        if (gamestate1.board[j][i] === "") {
+          emptyspace += 1;
+        }
+        console.log("this is l", emptyspace);
+        divnum += 1;
+        console.log(divnum);
         console.log(gamestate1.board[j][i]);
       }
     }
+
+    if (gamestate1.next === "x" && emptyspace > 0) {
+      turnplayer.textContent = `It is ${name1}'s turn place your x!`;
+    } else if (gamestate1.next === "o" && emptyspace > 0) {
+      turnplayer.textContent = `It is ${name2}'s turn place your o!`;
+    } else if (emptyspace === 0) {
+      turnplayer.textContent = "It's a Draw!";
+    }
+
     switch ("xxx") {
       case gamestate1.board[0][0] +
         gamestate1.board[0][1] +
         gamestate1.board[0][2]:
-        turnplayer.textContent = `${name1}'s the Winner!`;
+        winnerX();
         break;
       case gamestate1.board[1][0] +
         gamestate1.board[1][1] +
         gamestate1.board[1][2]:
-        turnplayer.textContent = `${name1}'s the Winner!`;
+        winnerX();
         break;
       case gamestate1.board[2][0] +
         gamestate1.board[2][1] +
         gamestate1.board[2][2]:
-        turnplayer.textContent = `${name1}'s the Winner!`;
+        winnerX();
         break;
       case gamestate1.board[0][0] +
         gamestate1.board[1][0] +
         gamestate1.board[2][0]:
-        turnplayer.textContent = `${name1}'s the Winner!`;
+        winnerX();
         break;
       case gamestate1.board[0][1] +
         gamestate1.board[1][1] +
         gamestate1.board[2][1]:
-        turnplayer.textContent = `${name1}'s the Winner!`;
+        winnerX();
         break;
       case gamestate1.board[0][2] +
         gamestate1.board[1][2] +
         gamestate1.board[2][2]:
-        turnplayer.textContent = `${name1}'s the Winner!`;
+        winnerX();
         break;
       case gamestate1.board[0][0] +
         gamestate1.board[1][1] +
         gamestate1.board[2][2]:
-        turnplayer.textContent = `${name1}'s the Winner!`;
+        winnerX();
         break;
       case gamestate1.board[0][2] +
         gamestate1.board[1][1] +
         gamestate1.board[2][0]:
-        turnplayer.textContent = `${name1}'s the Winner!`;
+        winnerX();
         break;
       default:
       // do nothing
@@ -286,42 +300,42 @@ const gameBoard = (() => {
       case gamestate1.board[0][0] +
         gamestate1.board[0][1] +
         gamestate1.board[0][2]:
-        turnplayer.textContent = `${name2}'s the Winner!`;
+        winnerO();
         break;
       case gamestate1.board[1][0] +
         gamestate1.board[1][1] +
         gamestate1.board[1][2]:
-        turnplayer.textContent = `${name2}'s the Winner!`;
+        winnerO();
         break;
       case gamestate1.board[2][0] +
         gamestate1.board[2][1] +
         gamestate1.board[2][2]:
-        turnplayer.textContent = `${name2}'s the Winner!`;
+        winnerO();
         break;
       case gamestate1.board[0][0] +
         gamestate1.board[1][0] +
         gamestate1.board[2][0]:
-        turnplayer.textContent = `${name2}'s the Winner!`;
+        winnerO();
         break;
       case gamestate1.board[0][1] +
         gamestate1.board[1][1] +
         gamestate1.board[2][1]:
-        turnplayer.textContent = `${name2}'s the Winner!`;
+        winnerO();
         break;
       case gamestate1.board[0][2] +
         gamestate1.board[1][2] +
         gamestate1.board[2][2]:
-        turnplayer.textContent = `${name2}'s the Winner!`;
+        winnerO();
         break;
       case gamestate1.board[0][0] +
         gamestate1.board[1][1] +
         gamestate1.board[2][2]:
-        turnplayer.textContent = `${name2}'s the Winner!`;
+        winnerO();
         break;
       case gamestate1.board[0][2] +
         gamestate1.board[1][1] +
         gamestate1.board[2][0]:
-        turnplayer.textContent = `${name2}'s the Winner!`;
+        winnerO();
         break;
       default:
       // do nothing
@@ -330,6 +344,8 @@ const gameBoard = (() => {
 
   // return functions
   return {
+    winnerX,
+    winnerO,
     fillarray,
     goingfirstX,
     goingfirstO,
