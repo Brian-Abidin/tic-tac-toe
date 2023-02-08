@@ -29,7 +29,7 @@ function newPlayer() {
 
   if (pname2 === "") {
     readytext2.style.color = "red";
-    readytext2.textContent = "player 2 is not ready!";
+    readytext2.textContent = "Player 2 is not ready!";
   } else {
     readytext2.style.color = "green";
     readytext2.textContent = `${pname2} is ready!`;
@@ -100,11 +100,31 @@ const gameBoard = (() => {
   const readytext = document.getElementById("readyp1");
   const readytext2 = document.getElementById("readyp2");
   const turnplayer = document.getElementById("turnplayer");
+
   // new newgame function
-  const newgame = () => {
+  const fillarray = () => {
+    let l = 0;
+    for (let j = 0; j < 3; j += 1) {
+      for (let k = 0; k < 3; k += 1) {
+        const newdiv = document.getElementById(`box${l}`);
+        gamestate1.board[k][j] = newdiv.textContent;
+        l += 1;
+        console.log(l);
+        console.log(gamestate1.board[k][j]);
+      }
+    }
+  };
+  newbutton.onclick = function newgame() {
     console.log(gamestate1.gofirst);
     const name1 = newPlayer().player1.name;
     const name2 = newPlayer().player2.name;
+
+    if (gamestate1.next === "x") {
+      turnplayer.textContent = `It is ${name1}'s turn place your x!`;
+    } else if (gamestate1.next === "o") {
+      turnplayer.textContent = `It is ${name2}'s turn place your o!`;
+    }
+
     if (
       (name1 !== "" && name2 !== "" && gamestate1.gofirst === "x") ||
       gamestate1.gofirst === "o"
@@ -142,6 +162,7 @@ const gameBoard = (() => {
       notready.style.display = "block";
       // add function that makes the box an object that represents board
     }
+    fillarray();
   };
   const goingfirstX = () => {
     const boxexists = document.getElementById("box1");
@@ -194,20 +215,122 @@ const gameBoard = (() => {
     o.style.color = "";
     x.style.color = "";
   };
-
-  game.onclick = function turn() {
+  game.onclick = function checkwin() {
     const name1 = newPlayer().player1.name;
     const name2 = newPlayer().player2.name;
     if (gamestate1.next === "x") {
-      turnplayer.textContent = `it is${name1}'s turn place your x!`;
+      turnplayer.textContent = `It is ${name1}'s turn place your x!`;
     } else if (gamestate1.next === "o") {
-      turnplayer.textContent = `it is${name2}'s turn place your o!`;
+      turnplayer.textContent = `It is ${name2}'s turn place your o!`;
+    }
+    if (gamestate1.board.includes("")) {
+      // do nothing
+    } else {
+      turnplayer.textContent = "It's a Draw!";
+    }
+    let k = 0;
+    for (let i = 0; i < 3; i += 1) {
+      for (let j = 0; j < 3; j += 1) {
+        const newbox = document.getElementById(`box${k}`);
+        gamestate1.board[j][i] = newbox.textContent;
+        k += 1;
+        console.log(k);
+        console.log(gamestate1.board[j][i]);
+      }
+    }
+    switch ("xxx") {
+      case gamestate1.board[0][0] +
+        gamestate1.board[0][1] +
+        gamestate1.board[0][2]:
+        turnplayer.textContent = `${name1}'s the Winner!`;
+        break;
+      case gamestate1.board[1][0] +
+        gamestate1.board[1][1] +
+        gamestate1.board[1][2]:
+        turnplayer.textContent = `${name1}'s the Winner!`;
+        break;
+      case gamestate1.board[2][0] +
+        gamestate1.board[2][1] +
+        gamestate1.board[2][2]:
+        turnplayer.textContent = `${name1}'s the Winner!`;
+        break;
+      case gamestate1.board[0][0] +
+        gamestate1.board[1][0] +
+        gamestate1.board[2][0]:
+        turnplayer.textContent = `${name1}'s the Winner!`;
+        break;
+      case gamestate1.board[0][1] +
+        gamestate1.board[1][1] +
+        gamestate1.board[2][1]:
+        turnplayer.textContent = `${name1}'s the Winner!`;
+        break;
+      case gamestate1.board[0][2] +
+        gamestate1.board[1][2] +
+        gamestate1.board[2][2]:
+        turnplayer.textContent = `${name1}'s the Winner!`;
+        break;
+      case gamestate1.board[0][0] +
+        gamestate1.board[1][1] +
+        gamestate1.board[2][2]:
+        turnplayer.textContent = `${name1}'s the Winner!`;
+        break;
+      case gamestate1.board[0][2] +
+        gamestate1.board[1][1] +
+        gamestate1.board[2][0]:
+        turnplayer.textContent = `${name1}'s the Winner!`;
+        break;
+      default:
+      // do nothing
+    }
+    switch ("ooo") {
+      case gamestate1.board[0][0] +
+        gamestate1.board[0][1] +
+        gamestate1.board[0][2]:
+        turnplayer.textContent = `${name2}'s the Winner!`;
+        break;
+      case gamestate1.board[1][0] +
+        gamestate1.board[1][1] +
+        gamestate1.board[1][2]:
+        turnplayer.textContent = `${name2}'s the Winner!`;
+        break;
+      case gamestate1.board[2][0] +
+        gamestate1.board[2][1] +
+        gamestate1.board[2][2]:
+        turnplayer.textContent = `${name2}'s the Winner!`;
+        break;
+      case gamestate1.board[0][0] +
+        gamestate1.board[1][0] +
+        gamestate1.board[2][0]:
+        turnplayer.textContent = `${name2}'s the Winner!`;
+        break;
+      case gamestate1.board[0][1] +
+        gamestate1.board[1][1] +
+        gamestate1.board[2][1]:
+        turnplayer.textContent = `${name2}'s the Winner!`;
+        break;
+      case gamestate1.board[0][2] +
+        gamestate1.board[1][2] +
+        gamestate1.board[2][2]:
+        turnplayer.textContent = `${name2}'s the Winner!`;
+        break;
+      case gamestate1.board[0][0] +
+        gamestate1.board[1][1] +
+        gamestate1.board[2][2]:
+        turnplayer.textContent = `${name2}'s the Winner!`;
+        break;
+      case gamestate1.board[0][2] +
+        gamestate1.board[1][1] +
+        gamestate1.board[2][0]:
+        turnplayer.textContent = `${name2}'s the Winner!`;
+        break;
+      default:
+      // do nothing
     }
   };
 
   // return functions
   return {
-    newgame,
+    fillarray,
     goingfirstX,
     goingfirstO,
     reset
