@@ -89,15 +89,15 @@ const gameBoard = (() => {
     const name1 = newPlayer().player1.name;
     const name2 = newPlayer().player2.name;
 
-    if (gamestate1.next === "x") {
+    if (name1 !== "" && name2 !== "" && gamestate1.next === "x") {
       turnplayer.textContent = `It is ${name1}'s turn place your x!`;
-    } else if (gamestate1.next === "o") {
+    } else if (name1 !== "" && name2 !== "" && gamestate1.next === "o") {
       turnplayer.textContent = `It is ${name2}'s turn place your o!`;
     }
 
     if (
       (name1 !== "" && name2 !== "" && gamestate1.gofirst === "x") ||
-      gamestate1.gofirst === "o"
+      (name1 !== "" && name2 !== "" && gamestate1.gofirst === "o")
     ) {
       resetbutton.style.display = "block";
       game.style.display = "grid";
