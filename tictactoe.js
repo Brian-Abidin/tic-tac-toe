@@ -314,9 +314,9 @@ const gameController = (() => {
         winnerO();
         break;
       case boardArr[0][1] + boardArr[1][1] + boardArr[2][1]:
-        box1.style.color = "green";
-        box2.style.color = "green";
-        box3.style.color = "green";
+        box4.style.color = "green";
+        box5.style.color = "green";
+        box6.style.color = "green";
         winnerO();
         break;
       case boardArr[0][2] + boardArr[1][2] + boardArr[2][2]:
