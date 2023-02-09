@@ -90,9 +90,9 @@ const gameBoard = (() => {
     const name2 = newPlayer().player2.name;
 
     if (name1 !== "" && name2 !== "" && gamestate1.next === "x") {
-      turnplayer.textContent = `It is ${name1}'s turn place your x!`;
+      turnplayer.textContent = `It is ${name1}'s turn! Place your X.`;
     } else if (name1 !== "" && name2 !== "" && gamestate1.next === "o") {
-      turnplayer.textContent = `It is ${name2}'s turn place your o!`;
+      turnplayer.textContent = `It is ${name2}'s turn! Place your O.`;
     }
 
     if (
@@ -219,40 +219,71 @@ const gameBoard = (() => {
 
   // checks if winner function
   const iswinner = () => {
+    const box1 = document.getElementById("box0");
+    const box2 = document.getElementById("box1");
+    const box3 = document.getElementById("box2");
+    const box4 = document.getElementById("box3");
+    const box5 = document.getElementById("box4");
+    const box6 = document.getElementById("box5");
+    const box7 = document.getElementById("box6");
+    const box8 = document.getElementById("box7");
+    const box9 = document.getElementById("box8");
+
     switch ("xxx") {
       case gamestate1.board[0][0] +
         gamestate1.board[0][1] +
         gamestate1.board[0][2]:
+        box1.style.color = "green";
+        box4.style.color = "green";
+        box7.style.color = "green";
         winnerX();
         break;
       case gamestate1.board[1][0] +
         gamestate1.board[1][1] +
         gamestate1.board[1][2]:
+        box2.style.color = "green";
+        box5.style.color = "green";
+        box8.style.color = "green";
         winnerX();
         break;
       case gamestate1.board[2][0] +
         gamestate1.board[2][1] +
         gamestate1.board[2][2]:
+        box3.style.color = "green";
+        box6.style.color = "green";
+        box9.style.color = "green";
         winnerX();
         break;
       case gamestate1.board[0][0] +
         gamestate1.board[1][0] +
         gamestate1.board[2][0]:
+        box1.style.color = "green";
+        box2.style.color = "green";
+        box3.style.color = "green";
         winnerX();
         break;
       case gamestate1.board[0][1] +
         gamestate1.board[1][1] +
         gamestate1.board[2][1]:
+        box4.style.color = "green";
+        box5.style.color = "green";
+        box6.style.color = "green";
         winnerX();
         break;
       case gamestate1.board[0][2] +
         gamestate1.board[1][2] +
         gamestate1.board[2][2]:
+        box7.style.color = "green";
+        box8.style.color = "green";
+        box9.style.color = "green";
         winnerX();
         break;
       case gamestate1.board[0][0] +
         gamestate1.board[1][1] +
         gamestate1.board[2][2]:
+        box1.style.color = "green";
+        box5.style.color = "green";
+        box9.style.color = "green";
         winnerX();
         break;
       case gamestate1.board[0][2] +
@@ -267,41 +298,65 @@ const gameBoard = (() => {
       case gamestate1.board[0][0] +
         gamestate1.board[0][1] +
         gamestate1.board[0][2]:
+        box1.style.color = "green";
+        box4.style.color = "green";
+        box7.style.color = "green";
         winnerO();
         break;
       case gamestate1.board[1][0] +
         gamestate1.board[1][1] +
         gamestate1.board[1][2]:
+        box2.style.color = "green";
+        box5.style.color = "green";
+        box8.style.color = "green";
         winnerO();
         break;
       case gamestate1.board[2][0] +
         gamestate1.board[2][1] +
         gamestate1.board[2][2]:
+        box3.style.color = "green";
+        box6.style.color = "green";
+        box9.style.color = "green";
         winnerO();
         break;
       case gamestate1.board[0][0] +
         gamestate1.board[1][0] +
         gamestate1.board[2][0]:
+        box1.style.color = "green";
+        box2.style.color = "green";
+        box3.style.color = "green";
         winnerO();
         break;
       case gamestate1.board[0][1] +
         gamestate1.board[1][1] +
         gamestate1.board[2][1]:
+        box1.style.color = "green";
+        box2.style.color = "green";
+        box3.style.color = "green";
         winnerO();
         break;
       case gamestate1.board[0][2] +
         gamestate1.board[1][2] +
         gamestate1.board[2][2]:
+        box7.style.color = "green";
+        box8.style.color = "green";
+        box9.style.color = "green";
         winnerO();
         break;
       case gamestate1.board[0][0] +
         gamestate1.board[1][1] +
         gamestate1.board[2][2]:
+        box1.style.color = "green";
+        box5.style.color = "green";
+        box9.style.color = "green";
         winnerO();
         break;
       case gamestate1.board[0][2] +
         gamestate1.board[1][1] +
         gamestate1.board[2][0]:
+        box7.style.color = "green";
+        box5.style.color = "green";
+        box3.style.color = "green";
         winnerO();
         break;
       default:
@@ -348,8 +403,12 @@ const gameBoard = (() => {
           // do nothing
         } else {
           turnplayer.style.fontSize = "30px";
-          turnplayer.style.color = "Orange";
+          turnplayer.style.color = "DarkOrange";
           turnplayer.textContent = "It's a Draw!";
+          for (let i = 0; i < 9; i += 1) {
+            const box = document.getElementById(`box${i}`);
+            box.style.color = "DarkOrange";
+          }
         }
       }
     }
