@@ -60,6 +60,8 @@ const gameController = (() => {
   let gameResult = gameboard().gamecopy.result;
 
   // variables
+  const body = document.getElementById("body");
+  const dark = document.getElementById("dark-mode");
   const game = document.getElementById("game");
   const x = document.getElementById("symbolX");
   const o = document.getElementById("symbolO");
@@ -105,6 +107,7 @@ const gameController = (() => {
       game.style.display = "grid";
       turnplayer.style.display = "grid";
 
+      dark.style.display = "none";
       notready.style.display = "none";
       info.style.display = "none";
       newbutton.style.display = "none";
@@ -120,6 +123,11 @@ const gameController = (() => {
         game.appendChild(row).classList.add(`box${i}`);
         row.id = `box${i}`;
         const newbox = document.getElementById(`box${i}`);
+        if (body.style.backgroundColor === "black") {
+          newbox.style.backgroundColor = "black";
+          newbox.style.color = "white";
+          newbox.style.borderColor = "white";
+        }
         newbox.onclick = function symbol() {
           if (
             newbox.textContent === "" &&
@@ -179,6 +187,7 @@ const gameController = (() => {
 
     info.style.display = "block";
     newbutton.style.display = "block";
+    dark.style.display = "grid";
 
     newPlayer().player1.name = "";
     newPlayer().player2.name = "";
@@ -385,6 +394,28 @@ const gameController = (() => {
           }
         }
       }
+    }
+  };
+
+  // dark mode toggle function
+  body.style.backgroundColor = "white";
+  dark.onclick = function toggledark() {
+    if (body.style.backgroundColor === "white") {
+      body.style.color = "white";
+      body.style.backgroundColor = "black";
+
+      dark.style.backgroundColor = "black";
+      dark.style.color = "white";
+      dark.style.borderColor = "white";
+      dark.textContent = "DARK";
+    } else if (body.style.backgroundColor === "black") {
+      body.style.color = "black";
+      body.style.backgroundColor = "white";
+
+      dark.style.backgroundColor = "white";
+      dark.style.color = "black";
+      dark.style.borderColor = "black";
+      dark.textContent = "LIGHT";
     }
   };
 
