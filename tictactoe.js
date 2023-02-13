@@ -430,3 +430,6 @@ const gameController = (() => {
     reset
   };
 })();
+
+// add math random function that gets a random number and
+// puts a symbol on that array. Make a Player vs AI section
