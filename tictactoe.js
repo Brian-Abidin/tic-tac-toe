@@ -28,6 +28,7 @@ function newPlayer() {
     readytext2.textContent = "Player 2 is not ready!";
   } else if (player2display === "none") {
     player2.name = "Computer";
+    player2.ai = "true";
   } else {
     readytext2.style.color = "green";
     readytext2.textContent = `${pname2} is ready!`;
@@ -453,7 +454,7 @@ const computerPlay = (() => {
     computer.name = "Computer";
 
     console.log(newPlayer().player1.name);
-    console.log(newPlayer().player2.name);
+    console.log(newPlayer().player2.ai);
     console.log(computer.symbol);
 
     return {
