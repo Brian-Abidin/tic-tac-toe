@@ -9,7 +9,7 @@
     <h1 class="title">Tic Tac Toe</h1>
     <div id="newgame">
       <div id="playernames">
-        <div class="player1">
+        <div id="player1wrapper">
           Player 1: X
           <input
             type="text"
@@ -19,7 +19,7 @@
           />
           <div id="readyp1"></div>
         </div>
-        <div class="player2">
+        <div id="player2wrapper">
           Player 2: O
           <input
             type="text"
@@ -29,7 +29,7 @@
           />
           <div id="readyp2"></div>
         </div>
-        <div class="gofirst">
+        <div class="gofirst" id="gofirst">
           Who would like to go first?
           <button id="symbolX" onclick="gameController.goingfirstX()">X</button>
           <button id="symbolO" onclick="gameController.goingfirstO()">O</button>
@@ -37,7 +37,7 @@
         <div>
           Dark Mode Toggle:
           <button id="dark-mode">LIGHT</button>
-          <button id="AI">vs. AI</button>
+          <button id="aI">vs. AI</button>
         </div> 
       </div>
       <button id="newbtn">New Game</button>
