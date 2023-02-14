@@ -135,21 +135,21 @@ const gameController = (() => {
           newbox.style.borderColor = "white";
         }
         newbox.onclick = function symbol() {
-          if (newPlayer().player2.ai === "true" && gamestate.next === "o") {
-            let randomnum = Math.floor(Math.random() * 8);
-            let square = document.getElementById(`box${randomnum}`);
-            while (square.textContent !== "") {
-              randomnum = Math.floor(Math.random() * 8);
-              square = document.getElementById(`box${randomnum}`);
-            }
-            square.textContent = "o";
-            gamestate.next = "x";
-            // if (square.textContent !== "") {
-            //   let randomnum = Math.floor(Math.random() * 8);
-            //   newbox.textContent = "o";
-            //   gamestate.next = "x";
-            // } else
-          }
+          // if (newPlayer().player2.ai === "true" && gamestate.next === "o") {
+          //   let randomnum = Math.floor(Math.random() * 8);
+          //   let square = document.getElementById(`box${randomnum}`);
+          //   while (square.textContent !== "") {
+          //     randomnum = Math.floor(Math.random() * 8);
+          //     square = document.getElementById(`box${randomnum}`);
+          //   }
+          //   square.textContent = "o";
+          //   gamestate.next = "x";
+          //   // if (square.textContent !== "") {
+          //   //   let randomnum = Math.floor(Math.random() * 8);
+          //   //   newbox.textContent = "o";
+          //   //   gamestate.next = "x";
+          //   // } else
+          // }
 
           if (
             newbox.textContent === "" &&
@@ -168,17 +168,33 @@ const gameController = (() => {
             newbox.textContent = "o";
             gamestate.next = "x";
           } else if (newPlayer().player2.ai === "true") {
-            newbox.textContent = "x";
-
-            // gamestate.next = "o";
-            let randomnum = Math.floor(Math.random() * 8);
-            let square = document.getElementById(`box${randomnum}`);
-            while (square.textContent !== "") {
-              randomnum = Math.floor(Math.random() * 8);
-              square = document.getElementById(`box${randomnum}`);
-            }
-            square.textContent = "o";
-            gamestate.next = "x";
+            // const copyArr = boardArr.map((e) => e);
+            // newbox.textContent = "x";
+            // // gamestate.next = "o";
+            // if (square.textContent === "") {
+            //   square.textContent = "o";
+            //   gamestate.next = "x";
+            // } else if (square.textContent === "x") {
+            //   randomnum = Math.floor(Math.random() * 8);
+            //   square = document.getElementById(`box${randomnum}`);
+            //   square.textContent = "o";
+            //   gamestate.next = "x";
+            // }
+            // let randomnum = Math.floor(Math.random() * 3);
+            // let square = document.getElementById(`box${randomnum}`);
+            // for (let j = 0; j < 3; j += 1) {
+            //   for (let k = 0; k < 3; k += 1) {
+            //     if (square.textContent === "" && copyArr[j][k] === "") {
+            //       square.textContent = "o";
+            //       gamestate.next = "x";
+            //       break;
+            //     }
+            //   }
+            // }
+            // while (square.textContent !== "") {
+            //   randomnum = Math.floor(Math.random() * 8);
+            //   square = document.getElementById(`box${randomnum}`);
+            // }
           }
         };
       }
@@ -411,6 +427,7 @@ const gameController = (() => {
           divnum += 1;
           console.log(divnum);
           console.log(boardArr[j][i]);
+          console.log(boardArr.length);
         }
       }
 
