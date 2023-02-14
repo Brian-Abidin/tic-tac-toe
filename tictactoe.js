@@ -3,21 +3,8 @@ function newPlayer() {
   const pname2 = document.getElementById("player2").value;
   const readytext = document.getElementById("readyp1");
   const readytext2 = document.getElementById("readyp2");
-  if (pname === "") {
-    readytext.style.color = "red";
-    readytext.textContent = "Player 1 is not ready!";
-  } else {
-    readytext.style.color = "green";
-    readytext.textContent = `${pname} is ready!`;
-  }
-
-  if (pname2 === "") {
-    readytext2.style.color = "red";
-    readytext2.textContent = "Player 2 is not ready!";
-  } else {
-    readytext2.style.color = "green";
-    readytext2.textContent = `${pname2} is ready!`;
-  }
+  const player2wrapper = document.getElementById("player2wrapper");
+  const player2display = player2wrapper.style.display;
 
   const player1 = {
     name: pname,
@@ -27,6 +14,24 @@ function newPlayer() {
     name: pname2,
     symbol: "o"
   };
+
+  if (pname === "") {
+    readytext.style.color = "red";
+    readytext.textContent = "Player 1 is not ready!";
+  } else {
+    readytext.style.color = "green";
+    readytext.textContent = `${pname} is ready!`;
+  }
+
+  if (pname2 === "" && player2display !== "none") {
+    readytext2.style.color = "red";
+    readytext2.textContent = "Player 2 is not ready!";
+  } else if (player2display === "none") {
+    player2.name = "Computer";
+  } else {
+    readytext2.style.color = "green";
+    readytext2.textContent = `${pname2} is ready!`;
+  }
   return {
     player1,
     player2
@@ -183,11 +188,13 @@ const gameController = (() => {
   // reset function
   const reset = () => {
     const node = document.getElementById("game");
+    const player2wrapper = document.getElementById("player2wrapper");
     node.querySelectorAll("*").forEach((n) => n.remove());
 
     info.style.display = "block";
     newbutton.style.display = "block";
     dark.style.display = "grid";
+    player2wrapper.style.display = "block";
 
     newPlayer().player1.name = "";
     newPlayer().player2.name = "";
@@ -195,10 +202,10 @@ const gameController = (() => {
     document.getElementById("player1").value = "";
     document.getElementById("player2").value = "";
 
-    readytext.textContent = "Player 1 is not ready!";
-    readytext2.textContent = "Player 2 is not ready!";
-    readytext.style.color = "red";
-    readytext2.style.color = "red";
+    readytext.textContent = "";
+    readytext2.textContent = "";
+    // readytext.style.color = "red";
+    // readytext2.style.color = "red";
 
     game.style.display = "none";
     resetbutton.style.display = "none";
@@ -434,7 +441,27 @@ const gameController = (() => {
 // add math random function that gets a random number and
 // puts a symbol on that array. Make a Player vs AI section
 const computerPlay = (() => {
+  const ai = document.getElementById("aI");
+  const p2wrapper = document.getElementById("player2wrapper");
+  const pname = document.getElementById("player2").value;
+
+  ai.onclick = function versusAI() {
+    p2wrapper.style.display = "none";
+    // newPlayer().player2.ai = "true";
+    const computer = {};
+    Object.assign(computer, newPlayer().player2);
+    computer.name = "Computer";
+
+    console.log(newPlayer().player1.name);
+    console.log(newPlayer().player2.name);
+    console.log(computer.symbol);
+
+    return {
+      computer
+    };
+  };
   // math.random - random number that places an x or o in the
   // board. Make a function that determines whether computer
   // is x or an o.
+  // on button click
 })();
