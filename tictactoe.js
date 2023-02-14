@@ -135,19 +135,49 @@ const gameController = (() => {
           newbox.style.borderColor = "white";
         }
         newbox.onclick = function symbol() {
+          if (newPlayer().player2.ai === "true" && gamestate.next === "o") {
+            let randomnum = Math.floor(Math.random() * 8);
+            let square = document.getElementById(`box${randomnum}`);
+            while (square.textContent !== "") {
+              randomnum = Math.floor(Math.random() * 8);
+              square = document.getElementById(`box${randomnum}`);
+            }
+            square.textContent = "o";
+            gamestate.next = "x";
+            // if (square.textContent !== "") {
+            //   let randomnum = Math.floor(Math.random() * 8);
+            //   newbox.textContent = "o";
+            //   gamestate.next = "x";
+            // } else
+          }
+
           if (
             newbox.textContent === "" &&
             gamestate.next === "x" &&
-            turnplayer.textContent.includes("turn")
+            turnplayer.textContent.includes("turn") &&
+            newPlayer().player2.ai !== "true"
           ) {
             newbox.textContent = "x";
             gamestate.next = "o";
           } else if (
             newbox.textContent === "" &&
             gamestate.next === "o" &&
-            turnplayer.textContent.includes("turn")
+            turnplayer.textContent.includes("turn") &&
+            newPlayer().player2.ai !== "true"
           ) {
             newbox.textContent = "o";
+            gamestate.next = "x";
+          } else if (newPlayer().player2.ai === "true") {
+            newbox.textContent = "x";
+
+            // gamestate.next = "o";
+            let randomnum = Math.floor(Math.random() * 8);
+            let square = document.getElementById(`box${randomnum}`);
+            while (square.textContent !== "") {
+              randomnum = Math.floor(Math.random() * 8);
+              square = document.getElementById(`box${randomnum}`);
+            }
+            square.textContent = "o";
             gamestate.next = "x";
           }
         };
@@ -212,7 +242,11 @@ const gameController = (() => {
     resetbutton.style.display = "none";
     turnplayer.style.display = "none";
     turnplayer.style.fontSize = "medium";
-    turnplayer.style.color = "black";
+    if (body.style.backgroundColor === "black") {
+      turnplayer.style.color = "white";
+    } else {
+      turnplayer.style.color = "black";
+    }
 
     gamestate.next = "";
     gamestate.gofirst = "";
@@ -411,6 +445,7 @@ const gameController = (() => {
     if (body.style.backgroundColor === "white") {
       body.style.color = "white";
       body.style.backgroundColor = "black";
+      turnplayer.style.color = "white";
 
       dark.style.backgroundColor = "black";
       dark.style.color = "white";
@@ -419,6 +454,7 @@ const gameController = (() => {
     } else if (body.style.backgroundColor === "black") {
       body.style.color = "black";
       body.style.backgroundColor = "white";
+      turnplayer.style.color = "black";
 
       dark.style.backgroundColor = "white";
       dark.style.color = "black";
