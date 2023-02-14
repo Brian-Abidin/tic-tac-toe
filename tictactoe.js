@@ -433,3 +433,8 @@ const gameController = (() => {
 
 // add math random function that gets a random number and
 // puts a symbol on that array. Make a Player vs AI section
+const computerPlay = (() => {
+  // math.random - random number that places an x or o in the
+  // board. Make a function that determines whether computer
+  // is x or an o.
+})();
