@@ -5,9 +5,9 @@
     <meta charset="UTF-8" />
     <link rel="stylesheet" href="style.css" />
   </head>
-  <body>
-    <h1 class="title">Tic Tac Toe Game</h1>
-    <div class="newgame">
+  <body id="body">
+    <h1 class="title">Tic Tac Toe</h1>
+    <div id="newgame">
       <div id="playernames">
         <div class="player1">
           Player 1: X
@@ -31,13 +31,17 @@
         </div>
         <div class="gofirst">
           Who would like to go first?
-          <button id="symbolX" onclick="gameBoard.goingfirstX()">X</button>
-          <button id="symbolO" onclick="gameBoard.goingfirstO()">O</button>
+          <button id="symbolX" onclick="gameController.goingfirstX()">X</button>
+          <button id="symbolO" onclick="gameController.goingfirstO()">O</button>
         </div>
+        <div>
+          Dark Mode Toggle:
+          <button id="dark-mode">LIGHT</button>
+          <button id="AI">vs. AI</button>
+        </div> 
       </div>
       <button id="newbtn">New Game</button>
-      <!--Could turn button inside a form to make players name each other first-->
-      <button id="reset" onclick="gameBoard.reset()">Reset</button>
+      <button id="reset" onclick="gameController.reset()">Reset</button>
     </div>
     <div class="board">
       <div id="notready">

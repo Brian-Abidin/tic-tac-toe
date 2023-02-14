@@ -1,7 +1,21 @@
 body {
-  font-family: "Courier New", Courier, monospace;
+  font-family: Chubby, Courier, monospace;
   margin: 0;
   padding: 0;
+  font-weight: 100;
+}
+
+#body {
+  background-color: rgb(192, 84, 84);
+}
+
+#dark-mode {
+  height: 20px;
+}
+
+@font-face {
+  font-family: Chubby;
+  src: url(../tic-tac-toe/fonts/FredokaOne-Regular.ttf);
 }
 
 h1 {
@@ -9,6 +23,7 @@ h1 {
   display: flex;
   align-items: center;
   justify-content: center;
+  font-weight: 200;
 }
 
 .board {
@@ -23,7 +38,7 @@ h1 {
   color: white;
   background-color: rgb(10, 99, 202);
   cursor: grab;
-  font-family: "Courier New", Courier, monospace;
+  font-family: Chubby, Courier, monospace;
   text-transform: uppercase;
   padding-top: 5px;
   margin-top: 5px;
@@ -42,7 +57,7 @@ h1 {
   display: none;
 }
 
-.newgame {
+#newgame {
   display: grid;
   align-items: center;
   justify-content: center;
@@ -67,8 +82,8 @@ h1 {
 #box6,
 #box7,
 #box8 {
-  background-color: rgb(255, 255, 255);
-  border: 3px rgb(2, 2, 2) solid;
+  background-color: white;
+  border: 3px rgb(0, 0, 0) solid;
   cursor: grab;
   display: flex;
   align-items: center;
@@ -81,8 +96,11 @@ h1 {
   color: green;
   margin-top: 5px;
 }
+
 #symbolX,
 #symbolO {
+  background-color: white;
+  border: 1px black solid;
 }
 
 #notready {
