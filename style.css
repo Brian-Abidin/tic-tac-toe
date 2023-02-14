@@ -63,9 +63,10 @@ h1 {
   justify-content: center;
 }
 
-.player2,
-.player1 {
+#player2wrapper,
+#player1wrapper {
   margin-bottom: 10px;
+  display: block;
 }
 
 #player1,
