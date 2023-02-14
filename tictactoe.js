@@ -30,8 +30,6 @@ function newPlayer() {
   return {
     player1,
     player2
-    // name: `${name}`
-    // symbol: `${symbol}`
   };
 }
 
@@ -43,22 +41,27 @@ function gameboard() {
       [0, 0, 0],
       [1, 1, 1],
       [2, 2, 2]
-    ]
+    ],
+    result: "in progess"
   };
-  const gamestate = {};
-  Object.assign(gamestate, game);
+  const gamecopy = {};
+  Object.assign(gamecopy, game);
   return {
-    gamestate
+    gamecopy
   };
 }
 
 // gameboard module
-const gameBoard = (() => {
+const gameController = (() => {
   // get gameboard function
   gameboard();
-  const gamestate1 = gameboard().gamestate;
+  const gamestate = gameboard().gamecopy;
+  const boardArr = gameboard().gamecopy.board;
+  let gameResult = gameboard().gamecopy.result;
 
   // variables
+  const body = document.getElementById("body");
+  const dark = document.getElementById("dark-mode");
   const game = document.getElementById("game");
   const x = document.getElementById("symbolX");
   const o = document.getElementById("symbolO");
@@ -68,6 +71,7 @@ const gameBoard = (() => {
   const readytext = document.getElementById("readyp1");
   const readytext2 = document.getElementById("readyp2");
   const turnplayer = document.getElementById("turnplayer");
+  const notready = document.getElementById("notready");
 
   // new newgame function
   const fillarray = () => {
@@ -75,34 +79,35 @@ const gameBoard = (() => {
     for (let j = 0; j < 3; j += 1) {
       for (let k = 0; k < 3; k += 1) {
         const newdiv = document.getElementById(`box${l}`);
-        gamestate1.board[k][j] = newdiv.textContent;
+        boardArr[k][j] = newdiv.textContent;
         l += 1;
         console.log(l);
-        console.log(gamestate1.board[k][j]);
+        console.log(boardArr[k][j]);
       }
     }
   };
 
   // function when newgame button is clicked
   newbutton.onclick = function newgame() {
-    console.log(gamestate1.gofirst);
+    console.log(gamestate.gofirst);
     const name1 = newPlayer().player1.name;
     const name2 = newPlayer().player2.name;
 
-    if (gamestate1.next === "x") {
-      turnplayer.textContent = `It is ${name1}'s turn place your x!`;
-    } else if (gamestate1.next === "o") {
-      turnplayer.textContent = `It is ${name2}'s turn place your o!`;
+    if (name1 !== "" && name2 !== "" && gamestate.next === "x") {
+      turnplayer.textContent = `It is ${name1}'s turn! Place your X.`;
+    } else if (name1 !== "" && name2 !== "" && gamestate.next === "o") {
+      turnplayer.textContent = `It is ${name2}'s turn! Place your O.`;
     }
 
     if (
-      (name1 !== "" && name2 !== "" && gamestate1.gofirst === "x") ||
-      gamestate1.gofirst === "o"
+      (name1 !== "" && name2 !== "" && gamestate.gofirst === "x") ||
+      (name1 !== "" && name2 !== "" && gamestate.gofirst === "o")
     ) {
       resetbutton.style.display = "block";
       game.style.display = "grid";
       turnplayer.style.display = "grid";
 
+      dark.style.display = "none";
       notready.style.display = "none";
       info.style.display = "none";
       newbutton.style.display = "none";
@@ -118,21 +123,26 @@ const gameBoard = (() => {
         game.appendChild(row).classList.add(`box${i}`);
         row.id = `box${i}`;
         const newbox = document.getElementById(`box${i}`);
+        if (body.style.backgroundColor === "black") {
+          newbox.style.backgroundColor = "black";
+          newbox.style.color = "white";
+          newbox.style.borderColor = "white";
+        }
         newbox.onclick = function symbol() {
           if (
             newbox.textContent === "" &&
-            gamestate1.next === "x" &&
+            gamestate.next === "x" &&
             turnplayer.textContent.includes("turn")
           ) {
             newbox.textContent = "x";
-            gamestate1.next = "o";
+            gamestate.next = "o";
           } else if (
             newbox.textContent === "" &&
-            gamestate1.next === "o" &&
+            gamestate.next === "o" &&
             turnplayer.textContent.includes("turn")
           ) {
             newbox.textContent = "o";
-            gamestate1.next = "x";
+            gamestate.next = "x";
           }
         };
       }
@@ -148,9 +158,9 @@ const gameBoard = (() => {
     if (boxexists === null) {
       x.style.color = "green";
       o.style.color = "white";
-      gamestate1.gofirst = "x";
-      gamestate1.next = "x";
-      console.log(gamestate1);
+      gamestate.gofirst = "x";
+      gamestate.next = "x";
+      console.log(gamestate);
     } else {
       // do nothing
     }
@@ -162,9 +172,9 @@ const gameBoard = (() => {
     if (boxexists === null) {
       o.style.color = "green";
       x.style.color = "white";
-      gamestate1.next = "o";
-      gamestate1.gofirst = "o";
-      console.log(gamestate1);
+      gamestate.next = "o";
+      gamestate.gofirst = "o";
+      console.log(gamestate);
     } else {
       // do nothing
     }
@@ -177,6 +187,7 @@ const gameBoard = (() => {
 
     info.style.display = "block";
     newbutton.style.display = "block";
+    dark.style.display = "grid";
 
     newPlayer().player1.name = "";
     newPlayer().player2.name = "";
@@ -195,15 +206,17 @@ const gameBoard = (() => {
     turnplayer.style.fontSize = "medium";
     turnplayer.style.color = "black";
 
-    gamestate1.next = "";
-    gamestate1.gofirst = "";
+    gamestate.next = "";
+    gamestate.gofirst = "";
     o.style.color = "";
     x.style.color = "";
+    gameResult = "in progress";
   };
 
   // if "X" wins function
   const winnerX = () => {
     const name1 = newPlayer().player1.name;
+    gameResult = "Player 1 wins!";
     turnplayer.textContent = `${name1}'s the Winner!`;
     turnplayer.style.fontSize = "30px";
     turnplayer.style.color = "Green";
@@ -212,6 +225,7 @@ const gameBoard = (() => {
   // if "O" wins function
   const winnerO = () => {
     const name2 = newPlayer().player2.name;
+    gameResult = "Player 2 wins!";
     turnplayer.textContent = `${name2}'s the Winner!`;
     turnplayer.style.fontSize = "30px";
     turnplayer.style.color = "Green";
@@ -219,89 +233,115 @@ const gameBoard = (() => {
 
   // checks if winner function
   const iswinner = () => {
+    const box1 = document.getElementById("box0");
+    const box2 = document.getElementById("box1");
+    const box3 = document.getElementById("box2");
+    const box4 = document.getElementById("box3");
+    const box5 = document.getElementById("box4");
+    const box6 = document.getElementById("box5");
+    const box7 = document.getElementById("box6");
+    const box8 = document.getElementById("box7");
+    const box9 = document.getElementById("box8");
+
     switch ("xxx") {
-      case gamestate1.board[0][0] +
-        gamestate1.board[0][1] +
-        gamestate1.board[0][2]:
+      case boardArr[0][0] + boardArr[0][1] + boardArr[0][2]:
+        box1.style.color = "green";
+        box4.style.color = "green";
+        box7.style.color = "green";
         winnerX();
         break;
-      case gamestate1.board[1][0] +
-        gamestate1.board[1][1] +
-        gamestate1.board[1][2]:
+      case boardArr[1][0] + boardArr[1][1] + boardArr[1][2]:
+        box2.style.color = "green";
+        box5.style.color = "green";
+        box8.style.color = "green";
         winnerX();
         break;
-      case gamestate1.board[2][0] +
-        gamestate1.board[2][1] +
-        gamestate1.board[2][2]:
+      case boardArr[2][0] + boardArr[2][1] + boardArr[2][2]:
+        box3.style.color = "green";
+        box6.style.color = "green";
+        box9.style.color = "green";
         winnerX();
         break;
-      case gamestate1.board[0][0] +
-        gamestate1.board[1][0] +
-        gamestate1.board[2][0]:
+      case boardArr[0][0] + boardArr[1][0] + boardArr[2][0]:
+        box1.style.color = "green";
+        box2.style.color = "green";
+        box3.style.color = "green";
         winnerX();
         break;
-      case gamestate1.board[0][1] +
-        gamestate1.board[1][1] +
-        gamestate1.board[2][1]:
+      case boardArr[0][1] + boardArr[1][1] + boardArr[2][1]:
+        box4.style.color = "green";
+        box5.style.color = "green";
+        box6.style.color = "green";
         winnerX();
         break;
-      case gamestate1.board[0][2] +
-        gamestate1.board[1][2] +
-        gamestate1.board[2][2]:
+      case boardArr[0][2] + boardArr[1][2] + boardArr[2][2]:
+        box7.style.color = "green";
+        box8.style.color = "green";
+        box9.style.color = "green";
         winnerX();
         break;
-      case gamestate1.board[0][0] +
-        gamestate1.board[1][1] +
-        gamestate1.board[2][2]:
+      case boardArr[0][0] + boardArr[1][1] + boardArr[2][2]:
+        box1.style.color = "green";
+        box5.style.color = "green";
+        box9.style.color = "green";
         winnerX();
         break;
-      case gamestate1.board[0][2] +
-        gamestate1.board[1][1] +
-        gamestate1.board[2][0]:
+      case boardArr[0][2] + boardArr[1][1] + boardArr[2][0]:
+        box7.style.color = "green";
+        box5.style.color = "green";
+        box3.style.color = "green";
         winnerX();
         break;
       default:
       // do nothing
     }
     switch ("ooo") {
-      case gamestate1.board[0][0] +
-        gamestate1.board[0][1] +
-        gamestate1.board[0][2]:
+      case boardArr[0][0] + boardArr[0][1] + boardArr[0][2]:
+        box1.style.color = "green";
+        box4.style.color = "green";
+        box7.style.color = "green";
         winnerO();
         break;
-      case gamestate1.board[1][0] +
-        gamestate1.board[1][1] +
-        gamestate1.board[1][2]:
+      case boardArr[1][0] + boardArr[1][1] + boardArr[1][2]:
+        box2.style.color = "green";
+        box5.style.color = "green";
+        box8.style.color = "green";
         winnerO();
         break;
-      case gamestate1.board[2][0] +
-        gamestate1.board[2][1] +
-        gamestate1.board[2][2]:
+      case boardArr[2][0] + boardArr[2][1] + boardArr[2][2]:
+        box3.style.color = "green";
+        box6.style.color = "green";
+        box9.style.color = "green";
         winnerO();
         break;
-      case gamestate1.board[0][0] +
-        gamestate1.board[1][0] +
-        gamestate1.board[2][0]:
+      case boardArr[0][0] + boardArr[1][0] + boardArr[2][0]:
+        box1.style.color = "green";
+        box2.style.color = "green";
+        box3.style.color = "green";
         winnerO();
         break;
-      case gamestate1.board[0][1] +
-        gamestate1.board[1][1] +
-        gamestate1.board[2][1]:
+      case boardArr[0][1] + boardArr[1][1] + boardArr[2][1]:
+        box4.style.color = "green";
+        box5.style.color = "green";
+        box6.style.color = "green";
         winnerO();
         break;
-      case gamestate1.board[0][2] +
-        gamestate1.board[1][2] +
-        gamestate1.board[2][2]:
+      case boardArr[0][2] + boardArr[1][2] + boardArr[2][2]:
+        box7.style.color = "green";
+        box8.style.color = "green";
+        box9.style.color = "green";
         winnerO();
         break;
-      case gamestate1.board[0][0] +
-        gamestate1.board[1][1] +
-        gamestate1.board[2][2]:
+      case boardArr[0][0] + boardArr[1][1] + boardArr[2][2]:
+        box1.style.color = "green";
+        box5.style.color = "green";
+        box9.style.color = "green";
         winnerO();
         break;
-      case gamestate1.board[0][2] +
-        gamestate1.board[1][1] +
-        gamestate1.board[2][0]:
+      case boardArr[0][2] + boardArr[1][1] + boardArr[2][0]:
+        box7.style.color = "green";
+        box5.style.color = "green";
+        box3.style.color = "green";
         winnerO();
         break;
       default:
@@ -315,43 +355,67 @@ const gameBoard = (() => {
     const name2 = newPlayer().player2.name;
     let divnum = 0;
     let emptyspace = 0;
-    if (
-      turnplayer.textContent.includes("Winner") ||
-      turnplayer.textContent.includes("Draw")
-    ) {
+    if (gameResult.includes("win")) {
       // do nothing
     } else {
       for (let i = 0; i < 3; i += 1) {
         for (let j = 0; j < 3; j += 1) {
           const newbox = document.getElementById(`box${divnum}`);
-          gamestate1.board[j][i] = newbox.textContent;
-          if (gamestate1.board[j][i] === "") {
+          boardArr[j][i] = newbox.textContent;
+          if (boardArr[j][i] === "") {
             emptyspace += 1;
           }
           console.log("this is l", emptyspace);
           divnum += 1;
           console.log(divnum);
-          console.log(gamestate1.board[j][i]);
+          console.log(boardArr[j][i]);
         }
       }
 
-      if (gamestate1.next === "x" && emptyspace > 0) {
+      if (gamestate.next === "x" && emptyspace > 0) {
         turnplayer.textContent = `It is ${name1}'s turn place your x!`;
         iswinner();
-      } else if (gamestate1.next === "o" && emptyspace > 0) {
+      } else if (gamestate.next === "o" && emptyspace > 0) {
         turnplayer.textContent = `It is ${name2}'s turn place your o!`;
         iswinner();
       }
       if (emptyspace === 0) {
         iswinner();
-        if (turnplayer.textContent.includes("Winner!")) {
+        if (gameResult.includes("win")) {
           // do nothing
         } else {
+          gameResult = "Draw";
           turnplayer.style.fontSize = "30px";
-          turnplayer.style.color = "Orange";
+          turnplayer.style.color = "DarkOrange";
           turnplayer.textContent = "It's a Draw!";
+          for (let i = 0; i < 9; i += 1) {
+            const box = document.getElementById(`box${i}`);
+            box.style.color = "DarkOrange";
+          }
         }
       }
+    }
+  };
+
+  // dark mode toggle function
+  body.style.backgroundColor = "white";
+  dark.onclick = function toggledark() {
+    if (body.style.backgroundColor === "white") {
+      body.style.color = "white";
+      body.style.backgroundColor = "black";
+
+      dark.style.backgroundColor = "black";
+      dark.style.color = "white";
+      dark.style.borderColor = "white";
+      dark.textContent = "DARK";
+    } else if (body.style.backgroundColor === "black") {
+      body.style.color = "black";
+      body.style.backgroundColor = "white";
+
+      dark.style.backgroundColor = "white";
+      dark.style.color = "black";
+      dark.style.borderColor = "black";
+      dark.textContent = "LIGHT";
     }
   };
 
@@ -367,18 +431,10 @@ const gameBoard = (() => {
   };
 })();
 
-// store gameboard as an array in side of gameboard object
-// 4 main objects: Gameboard, Player 1, Player 2,
-// and control flow of game
-// have as little global code as possible.
-// when you need multiples of something, create factories
-// when you need 1 of something, create modules
-// write a javascript function that renders the contents of the
-// gameboard array to the webpage.
-// build functions that allows players to mark specific spots
-// tie the spots to the DOM, letting players click on gameboard to
-// mark. Once a spot is taken cannot be marked.
-// check for when game is over, check for 3 in a row.
-// interface: allow players to put their name, 2 buttons
-// start and restart. and a display to congratulate winner.
-// function factory creates objects as new players
+// add math random function that gets a random number and
+// puts a symbol on that array. Make a Player vs AI section
+const computerPlay = (() => {
+  // math.random - random number that places an x or o in the
+  // board. Make a function that determines whether computer
+  // is x or an o.
+})();
