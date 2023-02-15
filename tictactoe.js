@@ -195,6 +195,10 @@ const gameController = (() => {
             //   randomnum = Math.floor(Math.random() * 8);
             //   square = document.getElementById(`box${randomnum}`);
             // }
+            const random = Math.floor(Math.random() * 3);
+            const random2 = Math.floor(Math.random() * 3);
+            // shuffle array then check if first element is empty, if empty
+            // add "o" to the array.
           }
         };
       }
