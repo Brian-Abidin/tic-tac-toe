@@ -48,7 +48,7 @@ function gameboard() {
       [1, 1, 1],
       [2, 2, 2]
     ],
-    result: "in progess"
+    result: "in progress"
   };
   const gamecopy = {};
   Object.assign(gamecopy, game);
@@ -135,22 +135,6 @@ const gameController = (() => {
           newbox.style.borderColor = "white";
         }
         newbox.onclick = function symbol() {
-          // if (newPlayer().player2.ai === "true" && gamestate.next === "o") {
-          //   let randomnum = Math.floor(Math.random() * 8);
-          //   let square = document.getElementById(`box${randomnum}`);
-          //   while (square.textContent !== "") {
-          //     randomnum = Math.floor(Math.random() * 8);
-          //     square = document.getElementById(`box${randomnum}`);
-          //   }
-          //   square.textContent = "o";
-          //   gamestate.next = "x";
-          //   // if (square.textContent !== "") {
-          //   //   let randomnum = Math.floor(Math.random() * 8);
-          //   //   newbox.textContent = "o";
-          //   //   gamestate.next = "x";
-          //   // } else
-          // }
-
           if (
             newbox.textContent === "" &&
             gamestate.next === "x" &&
@@ -167,22 +151,16 @@ const gameController = (() => {
           ) {
             newbox.textContent = "o";
             gamestate.next = "x";
-          } else if (newPlayer().player2.ai === "true") {
-            // const copyArr = boardArr.map((e) => e);
-            newbox.textContent = "x";
-            gamestate.next = "o";
+          } else if (
+            newPlayer().player2.ai === "true" &&
+            turnplayer.textContent.includes("turn")
+          ) {
             let randomnum = Math.floor(Math.random() * 9);
             let square = document.getElementById(`box${randomnum}`);
-            // for (let j = 0; j < 3; j += 1) {
-            //   for (let k = 0; k < 3; k += 1) {
-            //     if (square.textContent === "" && copyArr[j][k] === "") {
-            //       square.textContent = "o";
-            //       gamestate.next = "x";
-            //       break;
-            //     }
-            //   }
-            // }
             let counter = 0;
+
+            newbox.textContent = "x";
+            gamestate.next = "o";
             while (square.textContent !== "" && counter < 10) {
               randomnum = Math.floor(Math.random() * 9);
               square = document.getElementById(`box${randomnum}`);
@@ -193,17 +171,12 @@ const gameController = (() => {
             if (square.textContent === "") {
               square.textContent = "o";
               gamestate.next = "x";
-            } else if (square.textContent === "x") {
-              randomnum = Math.floor(Math.random() * 8);
-              square = document.getElementById(`box${randomnum}`);
-              square.textContent = "o";
-              gamestate.next = "x";
+              // } else if (square.textContent === "x") {
+              //   randomnum = Math.floor(Math.random() * 8);
+              //   square = document.getElementById(`box${randomnum}`);
+              //   square.textContent = "o";
+              //   gamestate.next = "x";
             }
-
-            // const random = Math.floor(Math.random() * 3);
-            // const random2 = Math.floor(Math.random() * 3);
-            // shuffle array then check if first element is empty, if empty
-            // add "o" to the array.
           }
         };
       }
