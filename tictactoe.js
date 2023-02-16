@@ -153,7 +153,8 @@ const gameController = (() => {
             gamestate.next = "x";
           } else if (
             newPlayer().player2.ai === "true" &&
-            turnplayer.textContent.includes("turn")
+            turnplayer.textContent.includes("turn") &&
+            newbox.textContent === ""
           ) {
             let randomnum = Math.floor(Math.random() * 9);
             let square = document.getElementById(`box${randomnum}`);
@@ -161,7 +162,7 @@ const gameController = (() => {
 
             newbox.textContent = "x";
             gamestate.next = "o";
-            while (square.textContent !== "" && counter < 10) {
+            while (square.textContent !== "" && counter < 50) {
               randomnum = Math.floor(Math.random() * 9);
               square = document.getElementById(`box${randomnum}`);
               counter += 1;
