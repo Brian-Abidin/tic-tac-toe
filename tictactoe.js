@@ -172,11 +172,6 @@ const gameController = (() => {
             if (square.textContent === "") {
               square.textContent = "o";
               gamestate.next = "x";
-              // } else if (square.textContent === "x") {
-              //   randomnum = Math.floor(Math.random() * 8);
-              //   square = document.getElementById(`box${randomnum}`);
-              //   square.textContent = "o";
-              //   gamestate.next = "x";
             }
           }
         };
